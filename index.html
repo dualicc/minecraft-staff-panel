@@ -9,14 +9,14 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background: #0f172a;
-            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            color: white;
         }
 
-        .login-box {
+        .box {
             background: #111827;
             padding: 30px;
             border-radius: 10px;
@@ -53,20 +53,20 @@
 
 <body>
 
-    <div class="login-box">
-        <h2>Staff Panel Login</h2>
+<div class="box">
+    <h2>Staff Panel Login</h2>
 
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
+    <input placeholder="Username">
+    <input type="password" placeholder="Password">
 
-        <button onclick="login()">Login</button>
-    </div>
+    <button onclick="login()">Login</button>
+</div>
 
-    <script>
-        function login() {
-            window.location.href = "dashboard.html";
-        }
-    </script>
+<script>
+function login() {
+    window.location.href = "dashboard.html";
+}
+</script>
 
 </body>
 </html>
