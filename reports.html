@@ -14,17 +14,75 @@
 
 <div class="content">
 
-    <div class="card">
-        <h3>Active Reports</h3>
-        <p>No active reports</p>
-    </div>
+    <div class="cards">
 
-    <div class="card">
-        <h3>Recent Activity</h3>
-        <p>System ready</p>
+        <!-- Report List -->
+        <div class="card">
+            <h3>Reports</h3>
+
+            <div class="report" onclick="openReport('Griefing - Steve')">
+                Griefing - Steve
+            </div>
+
+            <div class="report" onclick="openReport('Chat Abuse - Alex')">
+                Chat Abuse - Alex
+            </div>
+
+            <div class="report" onclick="openReport('Hacking - Notch')">
+                Hacking - Notch
+            </div>
+
+        </div>
+
+        <!-- Report Details -->
+        <div class="card" id="reportBox">
+            <h3>Report Details</h3>
+            <p>Select a report to view details</p>
+        </div>
+
     </div>
 
 </div>
+
+<script>
+function openReport(title) {
+    const box = document.getElementById("reportBox");
+
+    if (title === "Griefing - Steve") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> Destroyed player builds</p>
+            <p><b>Reported by:</b> Alex</p>
+            <p><b>Status:</b> Pending</p>
+            <button onclick="resolveReport(this)">Mark as Resolved</button>
+        `;
+    }
+
+    if (title === "Chat Abuse - Alex") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> Toxic chat behavior</p>
+            <p><b>Reported by:</b> Steve</p>
+            <p><b>Status:</b> Pending</p>
+            <button onclick="resolveReport(this)">Mark as Resolved</button>
+        `;
+    }
+
+    if (title === "Hacking - Notch") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> Suspected X-Ray</p>
+            <p><b>Reported by:</b> System</p>
+            <p><b>Status:</b> Under Review</p>
+            <button onclick="resolveReport(this)">Mark as Resolved</button>
+        `;
+    }
+}
+
+function resolveReport(btn) {
+    btn.outerHTML = "<p style='color:limegreen; font-weight:bold;'>Resolved ✔</p>";
+}
+</script>
 
 </body>
 </html>
