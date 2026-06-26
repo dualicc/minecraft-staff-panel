@@ -2,188 +2,148 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Network Control Panel</title>
+<title>Moderation Control Panel</title>
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* =========================
-   BASE APP LAYOUT
-========================= */
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #0b1220;
-    color: white;
+    color: #fff;
 }
 
-.app {
-    display: flex;
-    height: calc(100vh - 60px);
-}
-
-/* =========================
-   TOPBAR (SaaS STYLE)
-========================= */
-
+/* TOPBAR */
 .topbar {
-    height: 60px;
-    background: #0f172a;
-    border-bottom: 1px solid #1f2937;
+    height: 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 16px;
+    background: #0f172a;
+    border-bottom: 1px solid #1f2937;
 }
 
-/* =========================
-   SIDEBAR (REAL SOFTWARE STYLE)
-========================= */
+/* APP LAYOUT */
+.app {
+    display: grid;
+    grid-template-columns: 240px 1fr 360px;
+    height: calc(100vh - 56px);
+}
 
+/* SIDEBAR */
 .sidebar {
-    width: 260px;
     background: #0f172a;
     border-right: 1px solid #1f2937;
-    padding: 15px;
+    padding: 12px;
 }
 
-.section-title {
-    font-size: 12px;
-    opacity: 0.6;
-    margin-top: 15px;
+.nav-title {
+    font-size: 11px;
+    opacity: 0.5;
+    margin: 14px 0 6px;
 }
 
 .nav-item {
     padding: 10px;
-    margin-top: 6px;
+    margin-bottom: 6px;
     border-radius: 8px;
-    cursor: pointer;
     background: #111827;
-    transition: 0.15s;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
 }
 
 .nav-item:hover {
     background: #1f2937;
-    transform: translateX(3px);
 }
 
 .nav-item.active {
     background: #2563eb;
 }
 
-/* =========================
-   MAIN AREA
-========================= */
-
-.main {
-    flex: 1;
-    display: flex;
-}
-
-/* =========================
-   CENTER CONTENT
-========================= */
-
-.content {
-    flex: 1;
-    padding: 20px;
+/* CENTER PANEL */
+.center {
+    padding: 16px;
     overflow-y: auto;
 }
 
-/* =========================
-   RIGHT INSPECTOR PANEL
-========================= */
-
+/* RIGHT INSPECTOR */
 .inspector {
-    width: 340px;
     border-left: 1px solid #1f2937;
+    padding: 16px;
     background: #0f172a;
-    padding: 15px;
 }
 
-/* =========================
-   TABLE STYLE LISTS
-========================= */
+/* TABLE STYLE (IMPORTANT FIX) */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
 
-.list-item {
+.row {
+    display: grid;
+    grid-template-columns: 140px 120px 1fr 120px;
+    padding: 10px;
     background: #111827;
-    padding: 12px;
-    margin-top: 8px;
+    margin-bottom: 6px;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.15s;
 }
 
-.list-item:hover {
+.row:hover {
     background: #1f2937;
 }
 
-/* =========================
-   CARDS (DASHBOARD)
-========================= */
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+.badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #374151;
 }
 
-.card {
+/* DASH STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.stat {
     background: #111827;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
 }
 
-/* =========================
-   BADGES
-========================= */
-
-.badge {
-    font-size: 11px;
-    padding: 3px 8px;
-    background: #374151;
-    border-radius: 999px;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
+/* BUTTONS */
 button {
     margin-top: 10px;
-    padding: 8px 12px;
+    padding: 8px 10px;
     border: none;
     border-radius: 6px;
+    cursor: pointer;
     background: #2563eb;
     color: white;
-    cursor: pointer;
 }
 
 button:hover {
     background: #1d4ed8;
 }
 
-/* =========================
-   TEXT HELPERS
-========================= */
-
 .small {
     font-size: 12px;
     opacity: 0.7;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
     <div>
-        <b>Network Control Panel</b>
-        <div class="small">Moderation system</div>
+        <b>Moderation Control Panel</b>
+        <div class="small">Live network system</div>
     </div>
     <div class="small">Admin • Online</div>
 </div>
@@ -193,36 +153,27 @@ button:hover {
 <!-- SIDEBAR -->
 <div class="sidebar">
 
-    <div class="section-title">MAIN</div>
+    <div class="nav-title">OVERVIEW</div>
+    <div class="nav-item active" onclick="switchTab('dashboard', this)">Dashboard</div>
 
-    <div class="nav-item active" onclick="openTab('dashboard', this)">Dashboard</div>
-
-    <div class="section-title">MODERATION</div>
-
-    <div class="nav-item" onclick="openTab('reports', this)">Reports <span id="rcount"></span></div>
-    <div class="nav-item" onclick="openTab('punishments', this)">Punishments</div>
-    <div class="nav-item" onclick="openTab('appeals', this)">Appeals <span id="acount"></span></div>
-
-    <div class="section-title">SYSTEM</div>
-
-    <div class="nav-item" onclick="openTab('staff', this)">Staff</div>
+    <div class="nav-title">MODERATION</div>
+    <div class="nav-item" onclick="switchTab('reports', this)">Reports <span id="rC"></span></div>
+    <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
+    <div class="nav-item" onclick="switchTab('appeals', this)">Appeals <span id="aC"></span></div>
 
 </div>
 
-<!-- MAIN CONTENT -->
-<div class="main">
-
 <!-- CENTER -->
-<div class="content">
+<div class="center">
 
 <!-- DASHBOARD -->
 <div id="dashboard" class="tab">
 
-    <div class="grid">
-        <div class="card"><b>Players</b><p id="p">0</p></div>
-        <div class="card"><b>Reports</b><p id="r">0</p></div>
-        <div class="card"><b>Appeals</b><p id="a">0</p></div>
-        <div class="card"><b>Staff</b><p id="s">0</p></div>
+    <div class="stats">
+        <div class="stat"><b>Players</b><p id="p">0</p></div>
+        <div class="stat"><b>Reports</b><p id="r">0</p></div>
+        <div class="stat"><b>Appeals</b><p id="a">0</p></div>
+        <div class="stat"><b>Staff</b><p id="s">0</p></div>
     </div>
 
 </div>
@@ -232,12 +183,18 @@ button:hover {
 
     <h3>Report Queue</h3>
 
-    <div class="list-item" onclick="inspect('report','Steve','Griefing','Destroyed builds','Screenshots attached')">
-        Steve <span class="badge">Griefing</span>
+    <div class="row" onclick="inspect('Steve','Griefing','Destroyed multiple builds','Evidence: screenshots')">
+        <div>Steve</div>
+        <div><span class="badge">Grief</span></div>
+        <div>Destroyed multiple builds in spawn</div>
+        <div>Open</div>
     </div>
 
-    <div class="list-item" onclick="inspect('report','Alex','Chat Abuse','Toxic messages','Chat logs saved')">
-        Alex <span class="badge">Chat</span>
+    <div class="row" onclick="inspect('Alex','Chat Abuse','Toxic chat behavior','Logs attached')">
+        <div>Alex</div>
+        <div><span class="badge">Chat</span></div>
+        <div>Repeated toxic messages</div>
+        <div>Open</div>
     </div>
 
 </div>
@@ -245,10 +202,14 @@ button:hover {
 <!-- PUNISHMENTS -->
 <div id="punishments" class="tab" style="display:none;">
 
-    <h3>Player History</h3>
+    <h3>Punishment History</h3>
 
-    <div class="list-item" onclick="inspect('punish','Steve','Muted','Spam','2 previous warnings')">Steve</div>
-    <div class="list-item" onclick="inspect('punish','Notch','Banned','X-Ray','Permanent ban active')">Notch</div>
+    <div class="row" onclick="inspect('Notch','Ban','X-Ray detected','Permanent ban')">
+        <div>Notch</div>
+        <div><span class="badge">Ban</span></div>
+        <div>X-Ray usage confirmed</div>
+        <div>Closed</div>
+    </div>
 
 </div>
 
@@ -257,18 +218,13 @@ button:hover {
 
     <h3>Appeals Queue</h3>
 
-    <div class="list-item" onclick="inspect('appeal','Steve','Ban Appeal','Unfair ban','I was falsely banned')">Steve Appeal</div>
-
-</div>
-
-<!-- STAFF -->
-<div id="staff" class="tab" style="display:none;">
-    <div class="card">
-        <h3>Staff Online</h3>
-        <p>Admin • Online</p>
-        <p>Mod • Online</p>
-        <p>Helper • Offline</p>
+    <div class="row" onclick="inspect('Steve','Ban Appeal','Unfair ban claim','User statement submitted')">
+        <div>Steve</div>
+        <div><span class="badge">Appeal</span></div>
+        <div>Requesting ban review</div>
+        <div>Pending</div>
     </div>
+
 </div>
 
 </div>
@@ -277,48 +233,43 @@ button:hover {
 <div class="inspector" id="inspector">
 
     <h3>Inspector</h3>
-    <p class="small">Select an item</p>
+    <p class="small">Select a case</p>
 
 </div>
 
-</div>
 </div>
 
 <script>
 
-function openTab(id, el) {
+function switchTab(tab, el){
 
     document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
-    document.getElementById(id).style.display = "block";
+    document.getElementById(tab).style.display = "block";
 
     document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
     el.classList.add("active");
 }
 
-/* REAL ADMIN STYLE INSPECTOR */
-function inspect(type,u,t,r,e){
+function inspect(user,type,reason,evidence){
 
-    let box = document.getElementById("inspector");
+    document.getElementById("inspector").innerHTML = `
+        <h3>${user}</h3>
+        <p><span class="badge">${type}</span></p>
+        <p>${reason}</p>
+        <p class="small">${evidence}</p>
 
-    box.innerHTML = `
-        <h3>${u}</h3>
-        <p><span class="badge">${t}</span></p>
-        <p class="small"><b>Reason:</b> ${r}</p>
-        <p class="small"><b>Evidence:</b> ${e}</p>
-
-        <button onclick="this.parentElement.innerHTML='<p style=color:lime>Resolved ✔</p>'">Resolve</button>
+        <button onclick="this.parentElement.innerHTML='Resolved ✔'">Resolve Case</button>
     `;
 }
 
-/* LIVE DATA */
 function update(){
-    document.getElementById("p").textContent = Math.floor(Math.random()*900+300);
-    document.getElementById("r").textContent = Math.floor(Math.random()*40);
-    document.getElementById("a").textContent = Math.floor(Math.random()*25);
-    document.getElementById("s").textContent = Math.floor(Math.random()*30+5);
+    document.getElementById("p").innerText = Math.floor(Math.random()*900+300);
+    document.getElementById("r").innerText = Math.floor(Math.random()*40);
+    document.getElementById("a").innerText = Math.floor(Math.random()*25);
+    document.getElementById("s").innerText = Math.floor(Math.random()*30+5);
 
-    document.getElementById("rcount").textContent = "(" + Math.floor(Math.random()*10) + ")";
-    document.getElementById("acount").textContent = "(" + Math.floor(Math.random()*8) + ")";
+    document.getElementById("rC").innerText = "(" + Math.floor(Math.random()*10) + ")";
+    document.getElementById("aC").innerText = "(" + Math.floor(Math.random()*8) + ")";
 }
 
 update();
