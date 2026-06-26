@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Control Panel</title>
+<title>Moderation Control Panel</title>
 
 <style>
 body {
@@ -12,6 +12,7 @@ body {
     color: white;
 }
 
+/* TOPBAR */
 .topbar {
     height: 56px;
     display: flex;
@@ -69,10 +70,9 @@ body {
     border-left: 1px solid #1f2937;
     background: #0f172a;
     padding: 16px;
-    overflow-y: auto;
 }
 
-/* STATS (BACK, IMPORTANT) */
+/* STATS */
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -114,7 +114,7 @@ body {
 .status-denied { color: #ef4444; }
 .status-escalated { color: #f97316; }
 
-/* CHAT SYSTEM (REAL COMMUNICATION) */
+/* CHAT */
 .chat {
     margin-top: 12px;
     border-top: 1px solid #1f2937;
@@ -139,7 +139,6 @@ body {
     color: white;
 }
 
-/* BUTTONS */
 button {
     margin-top: 8px;
     margin-right: 6px;
@@ -166,8 +165,8 @@ button:hover {
 
 <div class="topbar">
     <div>
-        <b>Moderation Control Panel</b>
-        <div class="small">Live Network System</div>
+        <b>Moderation Panel</b>
+        <div class="small">Live System</div>
     </div>
     <div class="small">Admin • Online</div>
 </div>
@@ -180,17 +179,20 @@ button:hover {
     <div class="nav-title">OVERVIEW</div>
     <div class="nav-item active" onclick="switchTab('dashboard', this)">Dashboard</div>
 
-    <div class="nav-title">MODERATION</div>
+    <div class="nav-title">CASES</div>
     <div class="nav-item" onclick="switchTab('reports', this)">Reports</div>
     <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
     <div class="nav-item" onclick="switchTab('appeals', this)">Appeals</div>
+
+    <div class="nav-title">COMMUNICATION</div>
+    <div class="nav-item" onclick="switchTab('staffchat', this)">Staff Chat</div>
 
 </div>
 
 <!-- CENTER -->
 <div class="center">
 
-<!-- DASHBOARD (RESTORED PROPERLY) -->
+<!-- DASHBOARD -->
 <div id="dashboard" class="tab">
 
     <div class="stats">
@@ -205,19 +207,11 @@ button:hover {
 <!-- REPORTS -->
 <div id="reports" class="tab">
 
-    <h3>Reports Queue</h3>
+    <h3>Reports</h3>
 
-    <div class="case" onclick="openCase('Steve','Griefing','Destroyed spawn builds','Screenshots')">
-        <div>Steve</div>
-        <div><span class="badge">Grief</span></div>
-        <div>Destroyed spawn builds</div>
-        <div class="status-open">OPEN</div>
-    </div>
-
-    <div class="case" onclick="openCase('Alex','Chat Abuse','Toxic messages','Logs attached')">
-        <div>Alex</div>
-        <div><span class="badge">Chat</span></div>
-        <div>Spam + toxicity</div>
+    <div class="case" onclick="openCase('Steve','Griefing','Destroyed spawn','Screenshots')">
+        Steve <span class="badge">Grief</span>
+        <div>Destroyed spawn</div>
         <div class="status-open">OPEN</div>
     </div>
 
@@ -226,25 +220,23 @@ button:hover {
 <!-- PUNISHMENTS -->
 <div id="punishments" class="tab" style="display:none;">
     <h3>Punishments</h3>
-
-    <div class="case" onclick="openCase('Notch','Ban','X-Ray detected','System logs')">
-        <div>Notch</div>
-        <div><span class="badge">Ban</span></div>
-        <div>X-Ray usage</div>
-        <div class="status-escalated">ACTIVE</div>
-    </div>
 </div>
 
 <!-- APPEALS -->
 <div id="appeals" class="tab" style="display:none;">
     <h3>Appeals</h3>
+</div>
 
-    <div class="case" onclick="openCase('Steve','Appeal','Ban appeal request','User statement')">
-        <div>Steve</div>
-        <div><span class="badge">Appeal</span></div>
-        <div>Requesting review</div>
-        <div class="status-open">PENDING</div>
-    </div>
+<!-- STAFF CHAT -->
+<div id="staffchat" class="tab" style="display:none;">
+
+    <h3>Staff Chat</h3>
+
+    <div id="staffBox"></div>
+
+    <input class="input" id="staffMsg" placeholder="Message staff...">
+    <button onclick="sendStaff()">Send</button>
+
 </div>
 
 </div>
@@ -261,6 +253,8 @@ button:hover {
 
 <script>
 
+let currentUser = "";
+
 function switchTab(tab, el){
 
     document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
@@ -270,57 +264,69 @@ function switchTab(tab, el){
     el.classList.add("active");
 }
 
-/* REAL CASE SYSTEM */
 function openCase(user,type,reason,evidence){
+
+    currentUser = user;
 
     document.getElementById("inspector").innerHTML = `
         <h3>${user}</h3>
-        <p><b>Type:</b> ${type}</p>
-        <p><b>Reason:</b> ${reason}</p>
-        <p><b>Evidence:</b> ${evidence}</p>
+        <p><b>${type}</b></p>
+        <p>${reason}</p>
+        <p class="small">${evidence}</p>
 
         <hr style="border:1px solid #1f2937">
 
-        <button onclick="setStatus('Accepted')">Accept</button>
-        <button onclick="setStatus('Denied')">Deny</button>
-        <button onclick="setStatus('Escalated')">Escalate</button>
+        <button onclick="action('ACCEPTED')">Accept</button>
+        <button onclick="action('DENIED')">Deny</button>
+        <button onclick="action('ESCALATED')">Escalate</button>
 
         <div class="chat">
-            <b>Communication</b>
 
-            <div id="chatBox"></div>
+            <b>Case Chat (Staff ↔ Player)</b>
 
-            <input class="input" id="msg" placeholder="Message staff or player...">
+            <div id="chat"></div>
+
+            <input class="input" id="msg" placeholder="Message...">
             <button onclick="sendMsg()">Send</button>
+
         </div>
     `;
 }
 
-function setStatus(status){
-    document.getElementById("chatBox").innerHTML +=
-    `<div class="msg"><b>Status:</b> ${status}</div>`;
+function action(type){
+    document.getElementById("chat").innerHTML +=
+    `<div class="msg"><b>${type}</b> - Case updated for ${currentUser}</div>`;
 }
 
 function sendMsg(){
-    let msg = document.getElementById("msg").value;
-    if(!msg) return;
+    let m = document.getElementById("msg").value;
+    if(!m) return;
 
-    document.getElementById("chatBox").innerHTML +=
-    `<div class="msg">${msg}</div>`;
+    document.getElementById("chat").innerHTML +=
+    `<div class="msg"><b>Staff:</b> ${m}</div>`;
 
     document.getElementById("msg").value = "";
 }
 
-/* LIVE STATS */
-function update(){
-    document.getElementById("p").innerText = Math.floor(Math.random()*900+300);
-    document.getElementById("r").innerText = Math.floor(Math.random()*40);
-    document.getElementById("a").innerText = Math.floor(Math.random()*25);
-    document.getElementById("s").innerText = Math.floor(Math.random()*30+5);
+function sendStaff(){
+    let m = document.getElementById("staffMsg").value;
+    if(!m) return;
+
+    document.getElementById("staffBox").innerHTML +=
+    `<div class="msg">${m}</div>`;
+
+    document.getElementById("staffMsg").value = "";
 }
 
-update();
-setInterval(update,2000);
+function updateStats(){
+    document.getElementById("p").innerText = Math.floor(Math.random()*1000);
+    document.getElementById("r").innerText = Math.floor(Math.random()*50);
+    document.getElementById("a").innerText = Math.floor(Math.random()*30);
+    document.getElementById("s").innerText = Math.floor(Math.random()*20);
+}
+
+updateStats();
+setInterval(updateStats,2000);
 
 </script>
 
