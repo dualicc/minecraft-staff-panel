@@ -13,25 +13,40 @@
         <h1>Dashboard</h1>
         <p>Welcome back, Admin</p>
     </div>
-
-    <div class="profile">
-        <span class="status"></span>
-        Administrator
-    </div>
 </div>
 
 <div class="content">
 
     <div class="cards">
 
+        <div class="card">
+            <h3>Online Players</h3>
+            <p id="playersCount">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Active Reports</h3>
+            <p id="reportsCount">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Pending Appeals</h3>
+            <p id="appealsCount">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Staff Online</h3>
+            <p id="staffCount">0</p>
+        </div>
+
         <a class="card" href="reports.html">
             <h3>Reports</h3>
-            <p>View and manage player reports</p>
+            <p>Manage player reports</p>
         </a>
 
         <a class="card" href="punishments.html">
             <h3>Punishments</h3>
-            <p>Manage bans, mutes, kicks</p>
+            <p>View punishment system</p>
         </a>
 
         <a class="card" href="appeals.html">
@@ -41,12 +56,24 @@
 
         <a class="card" href="staff.html">
             <h3>Staff</h3>
-            <p>View staff activity</p>
+            <p>Staff activity</p>
         </a>
 
     </div>
 
 </div>
+
+<script>
+function updateStats() {
+    document.getElementById("playersCount").textContent = Math.floor(Math.random() * 60 + 10);
+    document.getElementById("reportsCount").textContent = Math.floor(Math.random() * 10);
+    document.getElementById("appealsCount").textContent = Math.floor(Math.random() * 8);
+    document.getElementById("staffCount").textContent = Math.floor(Math.random() * 5);
+}
+
+updateStats();
+setInterval(updateStats, 3000);
+</script>
 
 </body>
 </html>
