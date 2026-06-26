@@ -1,9 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Network Control Panel</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Network Control Panel</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* extra polish layered on top without breaking your css */
+
+.layout {
+    display: flex;
+    gap: 15px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+.nav-item {
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #111827;
+    transition: 0.15s;
+}
+
+.nav-item:hover {
+    background: #273244;
+    transform: translateX(3px);
+}
+
+.nav-item.active {
+    background: #2563eb;
+}
+
+/* MAIN AREA */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* CLICKABLE ITEMS */
+.item {
+    padding: 10px;
+    margin-top: 8px;
+    background: #111827;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.item:hover {
+    background: #273244;
+    transform: scale(1.01);
+}
+
+/* DETAIL PANEL */
+.panel-title {
+    margin-bottom: 10px;
+    color: #cbd5e1;
+}
+
+.detail {
+    color: #d1d5db;
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #374151;
+    font-size: 12px;
+    margin-left: 5px;
+}
+</style>
+
 </head>
 
 <body>
@@ -11,136 +95,122 @@
 <div class="topbar">
     <div>
         <h1>Network Control Panel</h1>
-        <p>Server moderation system</p>
+        <p>Moderation system overview</p>
     </div>
-
     <div>
         <p>Admin • Online</p>
     </div>
 </div>
 
-<div class="content" style="display:flex; gap:15px;">
+<div class="content layout">
 
     <!-- SIDEBAR -->
-    <div class="card" style="min-width:240px; height:fit-content;">
+    <div class="sidebar">
 
         <h3>Navigation</h3>
 
-        <p class="nav-item active" onclick="openTab('dashboard')">Dashboard</p>
-        <p class="nav-item" onclick="openTab('reports')">Reports</p>
-        <p class="nav-item" onclick="openTab('punishments')">Punishments</p>
-        <p class="nav-item" onclick="openTab('appeals')">Appeals</p>
-        <p class="nav-item" onclick="openTab('staff')">Staff</p>
+        <div class="nav">
+            <div class="nav-item active" onclick="openTab('dashboard', this)">Dashboard</div>
+            <div class="nav-item" onclick="openTab('reports', this)">Reports</div>
+            <div class="nav-item" onclick="openTab('punishments', this)">Punishments</div>
+            <div class="nav-item" onclick="openTab('appeals', this)">Appeals</div>
+            <div class="nav-item" onclick="openTab('staff', this)">Staff</div>
+        </div>
 
-        <hr style="border:1px solid #111827;">
+        <hr style="border:1px solid #111827; margin:15px 0;">
 
         <p>Status: <span style="color:lime;">● Online</span></p>
         <p>Region: NA-East</p>
 
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div style="flex:1;">
+    <!-- MAIN -->
+    <div class="main">
 
-        <!-- DASHBOARD TAB -->
+        <!-- DASHBOARD -->
         <div id="dashboard" class="tab">
 
             <div class="cards">
-
-                <div class="card">
-                    <h3>Players</h3>
-                    <p id="playersCount">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Reports</h3>
-                    <p id="reportsCount">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Appeals</h3>
-                    <p id="appealsCount">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Staff</h3>
-                    <p id="staffCount">0</p>
-                </div>
-
-            </div>
-
-            <div class="card" style="margin-top:15px;">
-                <h3>System Overview</h3>
-                <p>Server Status: <span style="color:lime;">Stable</span></p>
-                <p>Uptime: 18h 12m</p>
-                <p>TPS: 19.9</p>
+                <div class="card"><h3>Players</h3><p id="players">0</p></div>
+                <div class="card"><h3>Reports</h3><p id="reports">0</p></div>
+                <div class="card"><h3>Appeals</h3><p id="appeals">0</p></div>
+                <div class="card"><h3>Staff</h3><p id="staff">0</p></div>
             </div>
 
         </div>
 
-        <!-- REPORTS TAB -->
+        <!-- REPORTS -->
         <div id="reports" class="tab" style="display:none;">
 
             <div class="card">
-                <h3>Reports Queue</h3>
+                <h3>Report Queue</h3>
 
-                <div onclick="selectItem('report','Steve')" class="item">Griefing - Steve</div>
-                <div onclick="selectItem('report','Alex')" class="item">Chat Abuse - Alex</div>
-                <div onclick="selectItem('report','Notch')" class="item">Hacking - Notch</div>
+                <div class="item" onclick="showReport('Steve','Griefing','Destroyed multiple builds in spawn','Screenshots attached')">
+                    Steve <span class="badge">Griefing</span>
+                </div>
+
+                <div class="item" onclick="showReport('Alex','Chat Abuse','Repeated toxic language in chat','Chat logs saved')">
+                    Alex <span class="badge">Chat Abuse</span>
+                </div>
+
+                <div class="item" onclick="showReport('Notch','Hacking','Suspected X-Ray usage','Mining pattern evidence')">
+                    Notch <span class="badge">Hacking</span>
+                </div>
+
             </div>
 
             <div class="card" id="reportView">
-                <h3>Details</h3>
+                <h3 class="panel-title">Report Details</h3>
                 <p>Select a report</p>
             </div>
 
         </div>
 
-        <!-- PUNISHMENTS TAB -->
+        <!-- PUNISHMENTS -->
         <div id="punishments" class="tab" style="display:none;">
 
             <div class="card">
                 <h3>Players</h3>
 
-                <div onclick="selectItem('punish','Steve')" class="item">Steve</div>
-                <div onclick="selectItem('punish','Alex')" class="item">Alex</div>
-                <div onclick="selectItem('punish','Notch')" class="item">Notch</div>
+                <div class="item" onclick="showPunish('Steve','Warned + Muted','Spam and griefing history')">Steve</div>
+                <div class="item" onclick="showPunish('Alex','No punishments','Clean record')">Alex</div>
+                <div class="item" onclick="showPunish('Notch','Banned','X-Ray confirmed')">Notch</div>
 
             </div>
 
             <div class="card" id="punishView">
-                <h3>History</h3>
+                <h3 class="panel-title">Player History</h3>
                 <p>Select a player</p>
             </div>
 
         </div>
 
-        <!-- APPEALS TAB -->
+        <!-- APPEALS -->
         <div id="appeals" class="tab" style="display:none;">
 
             <div class="card">
                 <h3>Appeals</h3>
 
-                <div onclick="selectItem('appeal','Steve')" class="item">Ban Appeal - Steve</div>
-                <div onclick="selectItem('appeal','Alex')" class="item">Mute Appeal - Alex</div>
+                <div class="item" onclick="showAppeal('Steve','Ban Appeal','I believe this ban was unfair')">Steve Appeal</div>
+                <div class="item" onclick="showAppeal('Alex','Mute Appeal','I will follow rules next time')">Alex Appeal</div>
 
             </div>
 
             <div class="card" id="appealView">
-                <h3>Review</h3>
+                <h3 class="panel-title">Appeal Review</h3>
                 <p>Select an appeal</p>
             </div>
 
         </div>
 
-        <!-- STAFF TAB -->
+        <!-- STAFF -->
         <div id="staff" class="tab" style="display:none;">
 
             <div class="card">
                 <h3>Staff Online</h3>
-                <p>Admin - Online</p>
-                <p>Mod - Online</p>
-                <p>Helper - Offline</p>
+                <p>Admin • Online</p>
+                <p>Mod • Online</p>
+                <p>Helper • Offline</p>
             </div>
 
         </div>
@@ -150,49 +220,57 @@
 </div>
 
 <script>
-let activeTab = "dashboard";
 
-function openTab(tab) {
+function openTab(tab, el) {
 
     document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
     document.getElementById(tab).style.display = "block";
 
     document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
-    event.target.classList.add("active");
-
-    activeTab = tab;
+    el.classList.add("active");
 }
 
-function selectItem(type, name) {
-
-    if (type === "report") {
-        document.getElementById("reportView").innerHTML =
-        `<h3>${name} Report</h3><p>Details for report</p>`;
-    }
-
-    if (type === "punish") {
-        document.getElementById("punishView").innerHTML =
-        `<h3>${name}</h3><p>Punishment history</p>`;
-    }
-
-    if (type === "appeal") {
-        document.getElementById("appealView").innerHTML =
-        `<h3>${name} Appeal</h3>
-        <button onclick="this.parentElement.innerHTML='Approved ✔'">Approve</button>
-        <button onclick="this.parentElement.innerHTML='Denied ✖'">Deny</button>`;
-    }
+/* REPORTS */
+function showReport(user,type,reason,evidence){
+    document.getElementById("reportView").innerHTML = `
+        <h3>${user} <span class="badge">${type}</span></h3>
+        <p class="detail"><b>Reason:</b> ${reason}</p>
+        <p class="detail"><b>Evidence:</b> ${evidence}</p>
+        <button onclick="this.parentElement.innerHTML='<p style=color:lime>Resolved ✔</p>'">Resolve</button>
+    `;
 }
 
-function update() {
-    document.getElementById("playersCount").textContent = Math.floor(Math.random()*900+300);
-    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*40);
-    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*25);
-    document.getElementById("staffCount").textContent = Math.floor(Math.random()*30+5);
+/* PUNISHMENTS */
+function showPunish(user,status,notes){
+    document.getElementById("punishView").innerHTML = `
+        <h3>${user}</h3>
+        <p class="detail"><b>Status:</b> ${status}</p>
+        <p class="detail"><b>Notes:</b> ${notes}</p>
+    `;
+}
+
+/* APPEALS */
+function showAppeal(user,type,reason){
+    document.getElementById("appealView").innerHTML = `
+        <h3>${user} <span class="badge">${type}</span></h3>
+        <p class="detail">${reason}</p>
+
+        <button onclick="this.parentElement.innerHTML='<p style=color:lime>Approved ✔</p>'">Approve</button>
+        <button onclick="this.parentElement.innerHTML='<p style=color:red>Denied ✖</p>'">Deny</button>
+    `;
+}
+
+/* LIVE STATS */
+function update(){
+    document.getElementById("players").textContent = Math.floor(Math.random()*900+300);
+    document.getElementById("reports").textContent = Math.floor(Math.random()*40);
+    document.getElementById("appeals").textContent = Math.floor(Math.random()*25);
+    document.getElementById("staff").textContent = Math.floor(Math.random()*30+5);
 }
 
 update();
-setInterval(update, 2500);
+setInterval(update,2000);
+
 </script>
 
 </body>
