@@ -48,8 +48,6 @@ body {
     border-radius: 8px;
     background: #111827;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
 }
 
 .nav-item:hover {
@@ -74,36 +72,6 @@ body {
     overflow-y: auto;
 }
 
-/* STATS */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.stat {
-    background: #111827;
-    padding: 12px;
-    border-radius: 10px;
-}
-
-/* TOOLBAR */
-.toolbar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    background: #111827;
-    color: white;
-}
-
 /* CASE LIST */
 .case {
     background: #111827;
@@ -125,12 +93,21 @@ input {
     margin-left: 6px;
 }
 
-.status-open { color: #facc15; }
-.status-closed { color: #22c55e; }
-.status-escalated { color: #ef4444; }
+/* STATUS */
+.status {
+    font-size: 12px;
+    opacity: 0.8;
+}
 
+.status-open { color: #facc15; }
+.status-accepted { color: #22c55e; }
+.status-denied { color: #ef4444; }
+.status-escalated { color: #f97316; }
+
+/* BUTTONS */
 button {
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-right: 6px;
     padding: 8px 10px;
     border: none;
     border-radius: 6px;
@@ -143,21 +120,34 @@ button:hover {
     background: #1d4ed8;
 }
 
+/* CHAT / REPLIES */
+.chat {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #1f2937;
+}
+
+.msg {
+    background: #111827;
+    padding: 8px;
+    border-radius: 6px;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #111827;
+    color: white;
+}
+
 .small {
     font-size: 12px;
     opacity: 0.7;
-}
-
-.timeline {
-    margin-top: 10px;
-    padding-left: 10px;
-    border-left: 2px solid #1f2937;
-}
-
-.log {
-    font-size: 12px;
-    margin-bottom: 6px;
-    opacity: 0.8;
 }
 </style>
 </head>
@@ -167,7 +157,7 @@ button:hover {
 <div class="topbar">
     <div>
         <b>Moderation Control Panel</b>
-        <div class="small">Live case system</div>
+        <div class="small">Case Management System</div>
     </div>
     <div class="small">Admin • Online</div>
 </div>
@@ -178,71 +168,57 @@ button:hover {
 <div class="sidebar">
 
     <div class="nav-title">OVERVIEW</div>
-    <div class="nav-item active" onclick="switchTab('dashboard', this)">Dashboard</div>
+    <div class="nav-item active" onclick="switchTab('reports', this)">Reports</div>
 
-    <div class="nav-title">CASES</div>
-    <div class="nav-item" onclick="switchTab('reports', this)">Reports</div>
+    <div class="nav-title">MODERATION</div>
     <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
     <div class="nav-item" onclick="switchTab('appeals', this)">Appeals</div>
+    <div class="nav-item" onclick="switchTab('staff', this)">Staff</div>
 
 </div>
 
 <!-- CENTER -->
 <div class="center">
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="tab">
-
-    <div class="stats">
-        <div class="stat"><b>Players</b><p id="p">0</p></div>
-        <div class="stat"><b>Reports</b><p id="r">0</p></div>
-        <div class="stat"><b>Appeals</b><p id="a">0</p></div>
-        <div class="stat"><b>Staff</b><p id="s">0</p></div>
-    </div>
-
-</div>
-
 <!-- REPORTS -->
-<div id="reports" class="tab" style="display:none;">
+<div id="reports" class="tab">
 
-    <div class="toolbar">
-        <input placeholder="Search reports..." oninput="filterCases(this.value)">
+    <h3>Reports Queue</h3>
+
+    <div class="case" onclick="openCase('Steve','Griefing','Destroyed spawn builds','Screenshots attached')">
+        Steve <span class="badge">Grief</span> <span class="status status-open">OPEN</span>
     </div>
 
-    <div id="caseList">
-
-        <div class="case" onclick="openCase('Steve','Griefing','Destroyed multiple spawn builds','Evidence: screenshots','open')">
-            Steve <span class="badge">Grief</span> <span class="status-open">OPEN</span>
-        </div>
-
-        <div class="case" onclick="openCase('Alex','Chat Abuse','Toxic messages in chat','Logs attached','open')">
-            Alex <span class="badge">Chat</span> <span class="status-open">OPEN</span>
-        </div>
-
-        <div class="case" onclick="openCase('Notch','Hacking','X-Ray usage detected','Mining pattern data','escalated')">
-            Notch <span class="badge">Hack</span> <span class="status-escalated">ESCALATED</span>
-        </div>
-
+    <div class="case" onclick="openCase('Alex','Chat Abuse','Toxic messages','Chat logs')">
+        Alex <span class="badge">Chat</span> <span class="status status-open">OPEN</span>
     </div>
 
 </div>
 
 <!-- PUNISHMENTS -->
 <div id="punishments" class="tab" style="display:none;">
+    <h3>Punishments</h3>
 
-    <div class="case" onclick="openCase('Notch','Ban','Permanent ban issued','X-Ray confirmed','closed')">
-        Notch <span class="status-closed">CLOSED</span>
+    <div class="case" onclick="openCase('Notch','Ban','X-Ray usage','Permanent ban')">
+        Notch <span class="status status-accepted">BANNED</span>
     </div>
-
 </div>
 
 <!-- APPEALS -->
 <div id="appeals" class="tab" style="display:none;">
+    <h3>Appeals</h3>
 
-    <div class="case" onclick="openCase('Steve','Appeal','Ban appeal submitted','User statement included','open')">
-        Steve Appeal <span class="status-open">PENDING</span>
+    <div class="case" onclick="openCase('Steve','Ban Appeal','Unfair ban claim','User statement')">
+        Steve Appeal <span class="status status-open">PENDING</span>
     </div>
+</div>
 
+<!-- STAFF -->
+<div id="staff" class="tab" style="display:none;">
+    <h3>Staff</h3>
+    <p>Admin • Online</p>
+    <p>Mod • Online</p>
+    <p>Helper • Offline</p>
 </div>
 
 </div>
@@ -251,7 +227,7 @@ button:hover {
 <div class="inspector" id="inspector">
 
     <h3>Case Viewer</h3>
-    <p class="small">Select a case to view full details</p>
+    <p class="small">Select a case</p>
 
 </div>
 
@@ -259,60 +235,54 @@ button:hover {
 
 <script>
 
-function switchTab(id, el){
+function switchTab(tab, el){
 
     document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
-    document.getElementById(id).style.display = "block";
+    document.getElementById(tab).style.display = "block";
 
     document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
     el.classList.add("active");
 }
 
-function openCase(user,type,reason,evidence,status){
-
-    const time = new Date().toLocaleString();
+function openCase(user,type,reason,evidence){
 
     document.getElementById("inspector").innerHTML = `
         <h3>${user}</h3>
         <p><b>Type:</b> ${type}</p>
-        <p><b>Status:</b> ${status}</p>
-
-        <hr style="border:1px solid #1f2937">
-
         <p><b>Reason:</b> ${reason}</p>
         <p><b>Evidence:</b> ${evidence}</p>
 
-        <p class="small"><b>Opened:</b> ${time}</p>
-
-        <div class="timeline">
-            <div class="log">Case created</div>
-            <div class="log">Assigned to moderation queue</div>
-            <div class="log">Under review</div>
-        </div>
-
         <hr style="border:1px solid #1f2937">
 
-        <button onclick="this.parentElement.innerHTML='Resolved ✔'">Resolve</button>
-        <button onclick="this.parentElement.innerHTML='Escalated ⬆'">Escalate</button>
+        <button onclick="setStatus('Accepted','green')">Accept</button>
+        <button onclick="setStatus('Denied','red')">Deny</button>
+        <button onclick="setStatus('Escalated','orange')">Escalate</button>
+
+        <div class="chat">
+            <b>Internal Notes</b>
+
+            <div id="messages"></div>
+
+            <input class="input" id="msgInput" placeholder="Write internal note...">
+            <button onclick="addMsg()">Send Note</button>
+        </div>
     `;
 }
 
-function filterCases(value){
-    const cases = document.querySelectorAll(".case");
-    cases.forEach(c => {
-        c.style.display = c.innerText.toLowerCase().includes(value.toLowerCase()) ? "block" : "none";
-    });
+function setStatus(text,color){
+    document.getElementById("messages").innerHTML +=
+    `<div class="msg">Status changed: <b>${text}</b></div>`;
 }
 
-function update(){
-    document.getElementById("p").textContent = Math.floor(Math.random()*900+300);
-    document.getElementById("r").textContent = Math.floor(Math.random()*40);
-    document.getElementById("a").textContent = Math.floor(Math.random()*25);
-    document.getElementById("s").textContent = Math.floor(Math.random()*30+5);
-}
+function addMsg(){
+    const input = document.getElementById("msgInput");
+    if(!input.value) return;
 
-update();
-setInterval(update,2000);
+    document.getElementById("messages").innerHTML +=
+    `<div class="msg">${input.value}</div>`;
+
+    input.value = "";
+}
 
 </script>
 
