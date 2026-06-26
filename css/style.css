@@ -155,3 +155,8 @@ button:hover {
     background: #22c55e;
     border-radius: 50%;
 }
+.sidebar a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+}
