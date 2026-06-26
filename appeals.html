@@ -14,17 +14,79 @@
 
 <div class="content">
 
-    <div class="card">
-        <h3>Pending Appeals</h3>
-        <p>No appeals waiting review</p>
-    </div>
+    <div class="cards">
 
-    <div class="card">
-        <h3>Processed</h3>
-        <p>All caught up</p>
+        <!-- Appeal List -->
+        <div class="card">
+            <h3>Pending Appeals</h3>
+
+            <div class="appeal" onclick="openAppeal('Ban Appeal - Steve')">
+                Ban Appeal - Steve
+            </div>
+
+            <div class="appeal" onclick="openAppeal('Mute Appeal - Alex')">
+                Mute Appeal - Alex
+            </div>
+
+            <div class="appeal" onclick="openAppeal('Cheating Appeal - Notch')">
+                Cheating Appeal - Notch
+            </div>
+
+        </div>
+
+        <!-- Appeal Details -->
+        <div class="card" id="appealBox">
+            <h3>Appeal Details</h3>
+            <p>Select an appeal to review</p>
+        </div>
+
     </div>
 
 </div>
+
+<script>
+function openAppeal(title) {
+    const box = document.getElementById("appealBox");
+
+    if (title === "Ban Appeal - Steve") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> I was falsely banned</p>
+            <p><b>Status:</b> Pending</p>
+            <button onclick="approveAppeal(this)">Approve</button>
+            <button onclick="denyAppeal(this)">Deny</button>
+        `;
+    }
+
+    if (title === "Mute Appeal - Alex") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> I will behave better</p>
+            <p><b>Status:</b> Pending</p>
+            <button onclick="approveAppeal(this)">Approve</button>
+            <button onclick="denyAppeal(this)">Deny</button>
+        `;
+    }
+
+    if (title === "Cheating Appeal - Notch") {
+        box.innerHTML = `
+            <h3>${title}</h3>
+            <p><b>Reason:</b> I wasn't hacking</p>
+            <p><b>Status:</b> Under Review</p>
+            <button onclick="approveAppeal(this)">Approve</button>
+            <button onclick="denyAppeal(this)">Deny</button>
+        `;
+    }
+}
+
+function approveAppeal(btn) {
+    btn.parentElement.innerHTML = "<p style='color:limegreen; font-weight:bold;'>Appeal Approved ✔</p>";
+}
+
+function denyAppeal(btn) {
+    btn.parentElement.innerHTML = "<p style='color:red; font-weight:bold;'>Appeal Denied ✖</p>";
+}
+</script>
 
 </body>
 </html>
