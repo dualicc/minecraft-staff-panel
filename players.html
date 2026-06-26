@@ -1,29 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Players</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Panel | Players</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
+  <div class="sidebar">
+    <div class="logo">Staff Panel</div>
+
+    <a href="dashboard.html">Dashboard</a>
+    <a href="reports.html">Reports</a>
+    <a href="appeals.html">Appeals</a>
+    <a href="punishments.html">Punishments</a>
+    <a href="players.html" class="active">Players</a>
+    <a href="staff.html">Staff</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="audit-log.html">Audit Log</a>
+    <a href="settings.html">Settings</a>
+  </div>
+
+  <div class="main">
+
     <div class="topbar">
-        <h1>Players</h1>
+      <h1>Players</h1>
+      <div class="user">
+        <span class="status"></span>
+        Staff Panel
+      </div>
     </div>
 
-    <div class="content">
+    <div class="panel">
 
-        <div class="cards">
+      <h2>Player List</h2>
 
-            <div class="card">
-                <h3>Player Database</h3>
-                <p>No players loaded yet</p>
-            </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Rank</th>
+            <th>Status</th>
+            <th>Last Seen</th>
+          </tr>
+        </thead>
 
-        </div>
+        <tbody>
+          <tr>
+            <td>PlayerOne</td>
+            <td>VIP</td>
+            <td>Online</td>
+            <td>Now</td>
+          </tr>
+
+          <tr>
+            <td>Steve</td>
+            <td>Member</td>
+            <td>Offline</td>
+            <td>2 hrs ago</td>
+          </tr>
+
+          <tr>
+            <td>NoobSlayer</td>
+            <td>Admin</td>
+            <td>Online</td>
+            <td>Now</td>
+          </tr>
+        </tbody>
+
+      </table>
 
     </div>
+
+  </div>
 
 </body>
 </html>
