@@ -10,8 +10,8 @@
 
 <div class="topbar">
     <div>
-        <h1>Dashboard</h1>
-        <p>Welcome back, Admin</p>
+        <h1>Staff Dashboard</h1>
+        <p>Overview of server activity</p>
     </div>
 </div>
 
@@ -19,45 +19,43 @@
 
     <div class="cards">
 
+        <!-- LEFT: MAIN STATS -->
         <div class="card">
-            <h3>Online Players</h3>
-            <p id="playersCount">0</p>
+            <h3>Server Status</h3>
+            <p>Online Players: <span id="playersCount">0</span></p>
+            <p>Reports: <span id="reportsCount">0</span></p>
+            <p>Appeals: <span id="appealsCount">0</span></p>
+            <p>Staff Online: <span id="staffCount">0</span></p>
         </div>
 
-        <div class="card">
-            <h3>Reports</h3>
-            <p id="reportsCount">0</p>
-        </div>
-
-        <div class="card">
-            <h3>Appeals</h3>
-            <p id="appealsCount">0</p>
-        </div>
-
-        <div class="card">
-            <h3>Staff Online</h3>
-            <p id="staffCount">0</p>
-        </div>
-
+        <!-- QUICK ACTIONS -->
         <a class="card" href="reports.html">
-            <h3>Reports</h3>
-            <p>Manage reports</p>
+            <h3>Open Reports</h3>
+            <p>Review player reports</p>
         </a>
 
         <a class="card" href="punishments.html">
             <h3>Punishments</h3>
-            <p>Player history</p>
+            <p>Check player history</p>
         </a>
 
         <a class="card" href="appeals.html">
             <h3>Appeals</h3>
-            <p>Review appeals</p>
+            <p>Handle ban/mute appeals</p>
         </a>
 
         <a class="card" href="staff.html">
             <h3>Staff</h3>
-            <p>Staff activity</p>
+            <p>View staff activity</p>
         </a>
+
+        <!-- ACTIVITY FEED -->
+        <div class="card">
+            <h3>Recent Activity</h3>
+            <p>• Steve was reported for griefing</p>
+            <p>• Alex submitted an appeal</p>
+            <p>• Notch was punished (X-Ray)</p>
+        </div>
 
     </div>
 
