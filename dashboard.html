@@ -10,66 +10,82 @@
 
 <div class="topbar">
     <div>
-        <h1>Staff Control Panel</h1>
-        <p>Network overview and moderation tools</p>
+        <h1>Network Control Panel</h1>
+        <p>Moderation & server overview</p>
     </div>
 
     <div>
-        <p>Logged in: Admin</p>
+        <p>Admin • Online</p>
     </div>
 </div>
 
-<div class="content">
+<div class="content" style="display:flex; gap:15px;">
 
-    <div class="cards">
+    <!-- SIDEBAR -->
+    <div class="card" style="min-width:220px; height:fit-content;">
 
-        <!-- STATUS OVERVIEW -->
-        <div class="card">
-            <h3>Network Status</h3>
-            <p>Online Players: <span id="playersCount">0</span></p>
-            <p>Staff Online: <span id="staffCount">0</span></p>
-            <p>Active Reports: <span id="reportsCount">0</span></p>
-            <p>Pending Appeals: <span id="appealsCount">0</span></p>
+        <h3>Navigation</h3>
+
+        <p><a href="dashboard.html" style="color:white; text-decoration:none;">Dashboard</a></p>
+        <p><a href="reports.html" style="color:white; text-decoration:none;">Reports</a></p>
+        <p><a href="punishments.html" style="color:white; text-decoration:none;">Punishments</a></p>
+        <p><a href="appeals.html" style="color:white; text-decoration:none;">Appeals</a></p>
+        <p><a href="staff.html" style="color:white; text-decoration:none;">Staff</a></p>
+
+        <hr style="border:1px solid #111827;">
+
+        <p>Status: <span style="color:lime;">● Online</span></p>
+        <p>Region: NA-East</p>
+
+    </div>
+
+    <!-- MAIN AREA -->
+    <div style="flex:1; display:flex; flex-direction:column; gap:15px;">
+
+        <!-- TOP STATS -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Players</h3>
+                <p id="playersCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Reports</h3>
+                <p id="reportsCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Appeals</h3>
+                <p id="appealsCount">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Staff</h3>
+                <p id="staffCount">0</p>
+            </div>
+
         </div>
 
-        <!-- QUICK ACTIONS -->
-        <a class="card" href="reports.html">
-            <h3>Reports Queue</h3>
-            <p>Review and manage player reports</p>
-        </a>
-
-        <a class="card" href="punishments.html">
-            <h3>Punishment Logs</h3>
-            <p>View player moderation history</p>
-        </a>
-
-        <a class="card" href="appeals.html">
-            <h3>Appeals Center</h3>
-            <p>Handle ban and mute appeals</p>
-        </a>
-
-        <a class="card" href="staff.html">
-            <h3>Staff Activity</h3>
-            <p>Monitor staff online status</p>
-        </a>
-
-        <!-- LIVE ACTIVITY FEED -->
+        <!-- SYSTEM OVERVIEW -->
         <div class="card">
-            <h3>Live Activity</h3>
+            <h3>System Overview</h3>
+
+            <p>Server Status: <span style="color:lime;">Stable</span></p>
+            <p>Uptime: 14h 22m</p>
+            <p>TPS: 19.8</p>
+            <p>Queue Size: 3</p>
+        </div>
+
+        <!-- LIVE FEED -->
+        <div class="card">
+            <h3>Live Moderation Feed</h3>
 
             <p>🟡 Steve was reported for griefing</p>
-            <p>🟡 Alex submitted an appeal</p>
-            <p>🔴 Notch was banned (X-Ray detected)</p>
-            <p>🟢 ModX joined staff chat</p>
-            <p>🟡 Report queue updated</p>
-        </div>
-
-        <!-- SYSTEM INFO -->
-        <div class="card">
-            <h3>System</h3>
-            <p>Status: Stable</p>
-            <p>Region: NA-East</p>
-            <p>Uptime: 12h 43m</p>
+            <p>🔴 Notch was banned (X-Ray)</p>
+            <p>🟡 Alex submitted appeal</p>
+            <p>🟢 Staff member joined moderation chat</p>
+            <p>🟡 New report created</p>
         </div>
 
     </div>
@@ -78,14 +94,14 @@
 
 <script>
 function update() {
-    document.getElementById("playersCount").textContent = Math.floor(Math.random()*800 + 200);
-    document.getElementById("staffCount").textContent = Math.floor(Math.random()*25 + 5);
-    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*30);
-    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*20);
+    document.getElementById("playersCount").textContent = Math.floor(Math.random()*900 + 300);
+    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*40);
+    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*25);
+    document.getElementById("staffCount").textContent = Math.floor(Math.random()*30 + 5);
 }
 
 update();
-setInterval(update, 2500);
+setInterval(update, 2000);
 </script>
 
 </body>
