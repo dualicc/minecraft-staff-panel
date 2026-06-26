@@ -124,3 +124,34 @@ button:hover {
     margin-top: 10px;
     color: #94a3b8;
 }
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.topbar h1 {
+    font-size: 34px;
+}
+
+.topbar p {
+    color: #94a3b8;
+    margin-top: 6px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #111827;
+    padding: 12px 20px;
+    border-radius: 12px;
+}
+
+.status {
+    width: 10px;
+    height: 10px;
+    background: #22c55e;
+    border-radius: 50%;
+}
