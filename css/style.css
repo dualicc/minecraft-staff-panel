@@ -108,3 +108,19 @@ button {
 button:hover {
     background: #1d4ed8;
 }
+.appeal {
+    padding: 10px;
+    margin-top: 8px;
+    background: #111827;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.appeal:hover {
+    background: #273244;
+}
+
+button + button {
+    margin-left: 8px;
+}
