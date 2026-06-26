@@ -19,9 +19,9 @@
         <div class="card">
             <h3>Report List</h3>
 
-            <div class="report" onclick="openReport('Griefing')">Griefing - Steve</div>
-            <div class="report" onclick="openReport('Chat Abuse')">Chat Abuse - Alex</div>
-            <div class="report" onclick="openReport('Hacking')">Hacking - Notch</div>
+            <div class="report" onclick="openReport('Steve')">Griefing - Steve</div>
+            <div class="report" onclick="openReport('Alex')">Chat Abuse - Alex</div>
+            <div class="report" onclick="openReport('Notch')">Hacking - Notch</div>
 
         </div>
 
@@ -35,31 +35,19 @@
 </div>
 
 <script>
-function openReport(type) {
+function openReport(name) {
     const box = document.getElementById("reportBox");
 
-    if (type === "Griefing") {
-        box.innerHTML = `
-            <h3>Griefing - Steve</h3>
-            <p>Player destroyed builds</p>
-            <button onclick="resolve(this)">Resolve</button>
-        `;
+    if (name === "Steve") {
+        box.innerHTML = "<h3>Steve</h3><p>Griefing report</p><button onclick='resolve(this)'>Resolve</button>";
     }
 
-    if (type === "Chat Abuse") {
-        box.innerHTML = `
-            <h3>Chat Abuse - Alex</h3>
-            <p>Toxic chat behavior</p>
-            <button onclick="resolve(this)">Resolve</button>
-        `;
+    if (name === "Alex") {
+        box.innerHTML = "<h3>Alex</h3><p>Chat abuse report</p><button onclick='resolve(this)'>Resolve</button>";
     }
 
-    if (type === "Hacking") {
-        box.innerHTML = `
-            <h3>Hacking - Notch</h3>
-            <p>Suspected X-Ray</p>
-            <button onclick="resolve(this)">Resolve</button>
-        `;
+    if (name === "Notch") {
+        box.innerHTML = "<h3>Notch</h3><p>Hacking report</p><button onclick='resolve(this)'>Resolve</button>";
     }
 }
 
