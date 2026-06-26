@@ -25,12 +25,12 @@
         </div>
 
         <div class="card">
-            <h3>Active Reports</h3>
+            <h3>Reports</h3>
             <p id="reportsCount">0</p>
         </div>
 
         <div class="card">
-            <h3>Pending Appeals</h3>
+            <h3>Appeals</h3>
             <p id="appealsCount">0</p>
         </div>
 
@@ -41,17 +41,17 @@
 
         <a class="card" href="reports.html">
             <h3>Reports</h3>
-            <p>Manage player reports</p>
+            <p>Manage reports</p>
         </a>
 
         <a class="card" href="punishments.html">
             <h3>Punishments</h3>
-            <p>View punishment system</p>
+            <p>Player history</p>
         </a>
 
         <a class="card" href="appeals.html">
             <h3>Appeals</h3>
-            <p>Review player appeals</p>
+            <p>Review appeals</p>
         </a>
 
         <a class="card" href="staff.html">
@@ -64,15 +64,15 @@
 </div>
 
 <script>
-function updateStats() {
-    document.getElementById("playersCount").textContent = Math.floor(Math.random() * 60 + 10);
-    document.getElementById("reportsCount").textContent = Math.floor(Math.random() * 10);
-    document.getElementById("appealsCount").textContent = Math.floor(Math.random() * 8);
-    document.getElementById("staffCount").textContent = Math.floor(Math.random() * 5);
+function update() {
+    document.getElementById("playersCount").textContent = Math.floor(Math.random()*60+10);
+    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*10);
+    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*8);
+    document.getElementById("staffCount").textContent = Math.floor(Math.random()*5);
 }
 
-updateStats();
-setInterval(updateStats, 3000);
+update();
+setInterval(update, 3000);
 </script>
 
 </body>
