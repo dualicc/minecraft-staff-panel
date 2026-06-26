@@ -6,24 +6,45 @@
 <link rel="stylesheet" href="css/style.css">
 
 <style>
-/* extra polish layered on top without breaking your css */
+/* =========================
+   BASE LAYOUT SYSTEM
+========================= */
 
-.layout {
-    display: flex;
-    gap: 15px;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
 }
 
-/* SIDEBAR */
+.app {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    height: 60px;
+    background: #111827;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid #1f2937;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
 .sidebar {
     width: 240px;
-    background: #1f2937;
+    background: #111827;
+    border-right: 1px solid #1f2937;
     padding: 15px;
-    border-radius: 10px;
-    height: fit-content;
-}
-
-.nav {
-    margin-top: 10px;
 }
 
 .nav-item {
@@ -31,7 +52,7 @@
     margin-top: 6px;
     border-radius: 6px;
     cursor: pointer;
-    background: #111827;
+    background: #1f2937;
     transition: 0.15s;
 }
 
@@ -44,19 +65,56 @@
     background: #2563eb;
 }
 
-/* MAIN AREA */
+/* =========================
+   MAIN AREA
+========================= */
+
 .main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* =========================
+   PANELS
+========================= */
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+/* =========================
+   GRID STATS
+========================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
 }
 
-/* CLICKABLE ITEMS */
+.card {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+/* =========================
+   LIST ITEMS
+========================= */
+
 .item {
+    background: #111827;
     padding: 10px;
     margin-top: 8px;
-    background: #111827;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.15s;
@@ -64,208 +122,218 @@
 
 .item:hover {
     background: #273244;
-    transform: scale(1.01);
 }
 
-/* DETAIL PANEL */
-.panel-title {
-    margin-bottom: 10px;
-    color: #cbd5e1;
-}
-
-.detail {
-    color: #d1d5db;
-    line-height: 1.5;
-}
+/* =========================
+   BADGES
+========================= */
 
 .badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: #374151;
     font-size: 12px;
-    margin-left: 5px;
+    padding: 2px 8px;
+    background: #374151;
+    border-radius: 999px;
+    margin-left: 6px;
 }
-</style>
 
+/* =========================
+   DETAIL BOX
+========================= */
+
+.detail {
+    background: #111827;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.small {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+</style>
 </head>
 
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
     <div>
-        <h1>Network Control Panel</h1>
-        <p>Moderation system overview</p>
+        <b>Network Control Panel</b>
+        <div class="small">Moderation system</div>
     </div>
-    <div>
-        <p>Admin • Online</p>
-    </div>
+    <div class="small">Admin • Online</div>
 </div>
 
-<div class="content layout">
+<div class="app">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
+<!-- SIDEBAR -->
+<div class="sidebar">
 
-        <h3>Navigation</h3>
+    <div class="nav-item active" onclick="switchTab('dashboard', this)">Dashboard</div>
+    <div class="nav-item" onclick="switchTab('reports', this)">Reports</div>
+    <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
+    <div class="nav-item" onclick="switchTab('appeals', this)">Appeals</div>
+    <div class="nav-item" onclick="switchTab('staff', this)">Staff</div>
 
-        <div class="nav">
-            <div class="nav-item active" onclick="openTab('dashboard', this)">Dashboard</div>
-            <div class="nav-item" onclick="openTab('reports', this)">Reports</div>
-            <div class="nav-item" onclick="openTab('punishments', this)">Punishments</div>
-            <div class="nav-item" onclick="openTab('appeals', this)">Appeals</div>
-            <div class="nav-item" onclick="openTab('staff', this)">Staff</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="panel active">
+
+    <div class="grid">
+        <div class="card"><h3>Players</h3><p id="p">0</p></div>
+        <div class="card"><h3>Reports</h3><p id="r">0</p></div>
+        <div class="card"><h3>Appeals</h3><p id="a">0</p></div>
+        <div class="card"><h3>Staff</h3><p id="s">0</p></div>
+    </div>
+
+    <div class="detail">
+        <h3>System Status</h3>
+        <p>Server: Stable</p>
+        <p>TPS: 19.8</p>
+        <p>Uptime: 22h 11m</p>
+    </div>
+
+</div>
+
+<!-- REPORTS -->
+<div id="reports" class="panel">
+
+    <div class="card">
+        <h3>Report Queue</h3>
+
+        <div class="item" onclick="openReport('Steve','Griefing','Destroyed builds','Screenshots attached')">
+            Steve <span class="badge">Griefing</span>
         </div>
 
-        <hr style="border:1px solid #111827; margin:15px 0;">
+        <div class="item" onclick="openReport('Alex','Chat Abuse','Toxic language','Chat logs')">
+            Alex <span class="badge">Chat</span>
+        </div>
 
-        <p>Status: <span style="color:lime;">● Online</span></p>
-        <p>Region: NA-East</p>
+        <div class="item" onclick="openReport('Notch','Hacking','X-Ray suspected','Mining pattern')">
+            Notch <span class="badge">Hack</span>
+        </div>
+    </div>
+
+    <div id="reportBox" class="detail">
+        <h3>Report Details</h3>
+        <p>Select a report</p>
+    </div>
+
+</div>
+
+<!-- PUNISHMENTS -->
+<div id="punishments" class="panel">
+
+    <div class="card">
+        <h3>Players</h3>
+
+        <div class="item" onclick="openPunish('Steve','Muted','Spam')">Steve</div>
+        <div class="item" onclick="openPunish('Alex','Clean','None')">Alex</div>
+        <div class="item" onclick="openPunish('Notch','Banned','X-Ray')">Notch</div>
 
     </div>
 
-    <!-- MAIN -->
-    <div class="main">
+    <div id="punishBox" class="detail">
+        <h3>History</h3>
+        <p>Select a player</p>
+    </div>
 
-        <!-- DASHBOARD -->
-        <div id="dashboard" class="tab">
+</div>
 
-            <div class="cards">
-                <div class="card"><h3>Players</h3><p id="players">0</p></div>
-                <div class="card"><h3>Reports</h3><p id="reports">0</p></div>
-                <div class="card"><h3>Appeals</h3><p id="appeals">0</p></div>
-                <div class="card"><h3>Staff</h3><p id="staff">0</p></div>
-            </div>
+<!-- APPEALS -->
+<div id="appeals" class="panel">
 
-        </div>
+    <div class="card">
+        <h3>Appeals</h3>
 
-        <!-- REPORTS -->
-        <div id="reports" class="tab" style="display:none;">
-
-            <div class="card">
-                <h3>Report Queue</h3>
-
-                <div class="item" onclick="showReport('Steve','Griefing','Destroyed multiple builds in spawn','Screenshots attached')">
-                    Steve <span class="badge">Griefing</span>
-                </div>
-
-                <div class="item" onclick="showReport('Alex','Chat Abuse','Repeated toxic language in chat','Chat logs saved')">
-                    Alex <span class="badge">Chat Abuse</span>
-                </div>
-
-                <div class="item" onclick="showReport('Notch','Hacking','Suspected X-Ray usage','Mining pattern evidence')">
-                    Notch <span class="badge">Hacking</span>
-                </div>
-
-            </div>
-
-            <div class="card" id="reportView">
-                <h3 class="panel-title">Report Details</h3>
-                <p>Select a report</p>
-            </div>
-
-        </div>
-
-        <!-- PUNISHMENTS -->
-        <div id="punishments" class="tab" style="display:none;">
-
-            <div class="card">
-                <h3>Players</h3>
-
-                <div class="item" onclick="showPunish('Steve','Warned + Muted','Spam and griefing history')">Steve</div>
-                <div class="item" onclick="showPunish('Alex','No punishments','Clean record')">Alex</div>
-                <div class="item" onclick="showPunish('Notch','Banned','X-Ray confirmed')">Notch</div>
-
-            </div>
-
-            <div class="card" id="punishView">
-                <h3 class="panel-title">Player History</h3>
-                <p>Select a player</p>
-            </div>
-
-        </div>
-
-        <!-- APPEALS -->
-        <div id="appeals" class="tab" style="display:none;">
-
-            <div class="card">
-                <h3>Appeals</h3>
-
-                <div class="item" onclick="showAppeal('Steve','Ban Appeal','I believe this ban was unfair')">Steve Appeal</div>
-                <div class="item" onclick="showAppeal('Alex','Mute Appeal','I will follow rules next time')">Alex Appeal</div>
-
-            </div>
-
-            <div class="card" id="appealView">
-                <h3 class="panel-title">Appeal Review</h3>
-                <p>Select an appeal</p>
-            </div>
-
-        </div>
-
-        <!-- STAFF -->
-        <div id="staff" class="tab" style="display:none;">
-
-            <div class="card">
-                <h3>Staff Online</h3>
-                <p>Admin • Online</p>
-                <p>Mod • Online</p>
-                <p>Helper • Offline</p>
-            </div>
-
-        </div>
+        <div class="item" onclick="openAppeal('Steve','Ban Appeal','I was unfairly banned')">Steve</div>
+        <div class="item" onclick="openAppeal('Alex','Mute Appeal','I will improve')">Alex</div>
 
     </div>
 
+    <div id="appealBox" class="detail">
+        <h3>Appeal Review</h3>
+        <p>Select an appeal</p>
+    </div>
+
+</div>
+
+<!-- STAFF -->
+<div id="staff" class="panel">
+
+    <div class="card">
+        <h3>Staff Status</h3>
+        <p>Admin • Online</p>
+        <p>Mod • Online</p>
+        <p>Helper • Offline</p>
+    </div>
+
+</div>
+
+</div>
 </div>
 
 <script>
 
-function openTab(tab, el) {
+function switchTab(id, el) {
 
-    document.querySelectorAll(".tab").forEach(t => t.style.display = "none");
-    document.getElementById(tab).style.display = "block";
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
 
     document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
     el.classList.add("active");
 }
 
-/* REPORTS */
-function showReport(user,type,reason,evidence){
-    document.getElementById("reportView").innerHTML = `
-        <h3>${user} <span class="badge">${type}</span></h3>
-        <p class="detail"><b>Reason:</b> ${reason}</p>
-        <p class="detail"><b>Evidence:</b> ${evidence}</p>
-        <button onclick="this.parentElement.innerHTML='<p style=color:lime>Resolved ✔</p>'">Resolve</button>
-    `;
+/* REPORT */
+function openReport(u,t,r,e){
+    document.getElementById("reportBox").innerHTML =
+    `<h3>${u} <span class="badge">${t}</span></h3>
+    <p>${r}</p>
+    <p class="small">${e}</p>
+    <button onclick="this.parentElement.innerHTML='Resolved ✔'">Resolve</button>`;
 }
 
-/* PUNISHMENTS */
-function showPunish(user,status,notes){
-    document.getElementById("punishView").innerHTML = `
-        <h3>${user}</h3>
-        <p class="detail"><b>Status:</b> ${status}</p>
-        <p class="detail"><b>Notes:</b> ${notes}</p>
-    `;
+/* PUNISH */
+function openPunish(u,s,n){
+    document.getElementById("punishBox").innerHTML =
+    `<h3>${u}</h3><p>${s}</p><p class="small">${n}</p>`;
 }
 
-/* APPEALS */
-function showAppeal(user,type,reason){
-    document.getElementById("appealView").innerHTML = `
-        <h3>${user} <span class="badge">${type}</span></h3>
-        <p class="detail">${reason}</p>
-
-        <button onclick="this.parentElement.innerHTML='<p style=color:lime>Approved ✔</p>'">Approve</button>
-        <button onclick="this.parentElement.innerHTML='<p style=color:red>Denied ✖</p>'">Deny</button>
-    `;
+/* APPEAL */
+function openAppeal(u,t,r){
+    document.getElementById("appealBox").innerHTML =
+    `<h3>${u} <span class="badge">${t}</span></h3>
+    <p>${r}</p>
+    <button onclick="this.parentElement.innerHTML='Approved ✔'">Approve</button>
+    <button onclick="this.parentElement.innerHTML='Denied ✖'">Deny</button>`;
 }
 
-/* LIVE STATS */
+/* FAKE LIVE DATA */
 function update(){
-    document.getElementById("players").textContent = Math.floor(Math.random()*900+300);
-    document.getElementById("reports").textContent = Math.floor(Math.random()*40);
-    document.getElementById("appeals").textContent = Math.floor(Math.random()*25);
-    document.getElementById("staff").textContent = Math.floor(Math.random()*30+5);
+    document.getElementById("p").textContent = Math.floor(Math.random()*900+300);
+    document.getElementById("r").textContent = Math.floor(Math.random()*40);
+    document.getElementById("a").textContent = Math.floor(Math.random()*25);
+    document.getElementById("s").textContent = Math.floor(Math.random()*30+5);
 }
 
 update();
