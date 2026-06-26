@@ -16,28 +16,17 @@
 
     <div class="cards">
 
-        <!-- Appeal List -->
         <div class="card">
-            <h3>Pending Appeals</h3>
+            <h3>Appeals</h3>
 
-            <div class="appeal" onclick="openAppeal('Ban Appeal - Steve')">
-                Ban Appeal - Steve
-            </div>
-
-            <div class="appeal" onclick="openAppeal('Mute Appeal - Alex')">
-                Mute Appeal - Alex
-            </div>
-
-            <div class="appeal" onclick="openAppeal('Cheating Appeal - Notch')">
-                Cheating Appeal - Notch
-            </div>
+            <div onclick="openA('Steve')">Ban Appeal - Steve</div>
+            <div onclick="openA('Alex')">Mute Appeal - Alex</div>
 
         </div>
 
-        <!-- Appeal Details -->
         <div class="card" id="appealBox">
-            <h3>Appeal Details</h3>
-            <p>Select an appeal to review</p>
+            <h3>Details</h3>
+            <p>Select appeal</p>
         </div>
 
     </div>
@@ -45,46 +34,15 @@
 </div>
 
 <script>
-function openAppeal(title) {
+function openA(name) {
     const box = document.getElementById("appealBox");
 
-    if (title === "Ban Appeal - Steve") {
-        box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> I was falsely banned</p>
-            <p><b>Status:</b> Pending</p>
-            <button onclick="approveAppeal(this)">Approve</button>
-            <button onclick="denyAppeal(this)">Deny</button>
-        `;
-    }
-
-    if (title === "Mute Appeal - Alex") {
-        box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> I will behave better</p>
-            <p><b>Status:</b> Pending</p>
-            <button onclick="approveAppeal(this)">Approve</button>
-            <button onclick="denyAppeal(this)">Deny</button>
-        `;
-    }
-
-    if (title === "Cheating Appeal - Notch") {
-        box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> I wasn't hacking</p>
-            <p><b>Status:</b> Under Review</p>
-            <button onclick="approveAppeal(this)">Approve</button>
-            <button onclick="denyAppeal(this)">Deny</button>
-        `;
-    }
-}
-
-function approveAppeal(btn) {
-    btn.parentElement.innerHTML = "<p style='color:limegreen; font-weight:bold;'>Appeal Approved ✔</p>";
-}
-
-function denyAppeal(btn) {
-    btn.parentElement.innerHTML = "<p style='color:red; font-weight:bold;'>Appeal Denied ✖</p>";
+    box.innerHTML = `
+        <h3>${name} Appeal</h3>
+        <p>Reason: I want unban/unmute</p>
+        <button onclick="this.parentElement.innerHTML='Approved ✔'">Approve</button>
+        <button onclick="this.parentElement.innerHTML='Denied ✖'">Deny</button>
+    `;
 }
 </script>
 
