@@ -1,299 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Staff Dashboard</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: white;
-}
-
-/* TOPBAR */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 18px;
-    background: #111827;
-    border-bottom: 1px solid #1f2937;
-}
-
-/* LAYOUT */
-.app {
-    display: grid;
-    grid-template-columns: 240px 1fr 340px;
-    height: calc(100vh - 56px);
-}
-
-/* SIDEBAR */
-.sidebar {
-    background: #0f172a;
-    border-right: 1px solid #1f2937;
-    padding: 10px;
-}
-
-.nav-item {
-    padding: 10px;
-    margin-bottom: 6px;
-    border-radius: 6px;
-    background: #111827;
-    cursor: pointer;
-}
-
-.nav-item:hover {
-    background: #1f2937;
-}
-
-.nav-item.active {
-    background: #2563eb;
-}
-
-/* CENTER */
-.center {
-    padding: 12px;
-    overflow-y: auto;
-}
-
-/* TABS */
-.tab {
-    display: none;
-}
-
-.tab.active {
-    display: block;
-}
-
-/* CASE */
-.case {
-    background: #111827;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.case:hover {
-    background: #1f2937;
-}
-
-/* INSPECTOR */
-.inspector {
-    border-left: 1px solid #1f2937;
-    padding: 12px;
-    background: #0f172a;
-}
-
-/* CHAT */
-.msg {
-    background: #111827;
-    padding: 6px;
-    margin-top: 6px;
-    border-radius: 6px;
-    font-size: 13px;
-}
-
-.input {
-    width: 100%;
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    background: #111827;
-    color: white;
-}
-
-button {
-    margin-top: 8px;
-    margin-right: 6px;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    background: #2563eb;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #1d4ed8;
-}
-
-.small {
-    font-size: 12px;
-    opacity: 0.7;
-}
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Panel | Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-<div class="topbar">
-    <div>
-        <b>Staff Panel</b>
-        <div class="small">Moderation System</div>
-    </div>
-    <div class="small">Admin Online</div>
-</div>
+  <div class="sidebar">
+    <div class="logo">Staff Panel</div>
 
-<div class="app">
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="reports.html">Reports</a>
+    <a href="appeals.html">Appeals</a>
+    <a href="punishments.html">Punishments</a>
+    <a href="players.html">Players</a>
+    <a href="staff.html">Staff</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="audit-log.html">Audit Log</a>
+    <a href="settings.html">Settings</a>
+  </div>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
+  <div class="main">
 
-    <div class="nav-item active" onclick="switchTab('reports', this)">Reports</div>
-    <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
-    <div class="nav-item" onclick="switchTab('appeals', this)">Appeals</div>
-    <div class="nav-item" onclick="switchTab('staffchat', this)">Staff Chat</div>
-    <div class="nav-item" onclick="switchTab('logs', this)">Logs</div>
-
-</div>
-
-<!-- CENTER -->
-<div class="center">
-
-<!-- REPORTS -->
-<div id="reports" class="tab active">
-    <h3>Reports</h3>
-
-    <div class="case" onclick="openCase('Steve','Griefing spawn')">
-        Steve - Griefing spawn
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <div class="user">
+        <span class="status"></span>
+        Administrator
+      </div>
     </div>
 
-    <div class="case" onclick="openCase('Alex','Spam chat')">
-        Alex - Spam chat
+    <div class="cards">
+
+      <div class="card">
+        <h3>Active Reports</h3>
+        <p>12</p>
+      </div>
+
+      <div class="card">
+        <h3>Open Appeals</h3>
+        <p>5</p>
+      </div>
+
+      <div class="card">
+        <h3>Punishments Today</h3>
+        <p>8</p>
+      </div>
+
+      <div class="card">
+        <h3>Online Staff</h3>
+        <p>3</p>
+      </div>
+
     </div>
-</div>
 
-<!-- PUNISHMENTS -->
-<div id="punishments" class="tab">
-    <h3>Punishments</h3>
-</div>
+    <div class="panel">
 
-<!-- APPEALS -->
-<div id="appeals" class="tab">
-    <h3>Appeals</h3>
-</div>
+      <h2>Recent Activity</h2>
 
-<!-- STAFF CHAT -->
-<div id="staffchat" class="tab">
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Action</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>dualic</td>
+            <td>Muted player for spam</td>
+            <td>2 min ago</td>
+          </tr>
+          <tr>
+            <td>AdminX</td>
+            <td>Reviewed report #124</td>
+            <td>10 min ago</td>
+          </tr>
+          <tr>
+            <td>ModZ</td>
+            <td>Accepted appeal #87</td>
+            <td>25 min ago</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <h3>Staff Chat</h3>
+    </div>
 
-    <div id="staffBox"></div>
-
-    <input class="input" id="staffMsg" placeholder="Message staff...">
-    <button onclick="sendStaff()">Send</button>
-
-</div>
-
-<!-- LOGS -->
-<div id="logs" class="tab">
-
-    <h3>System Logs</h3>
-
-    <div id="logBox"></div>
-
-</div>
-
-</div>
-
-<!-- INSPECTOR -->
-<div class="inspector" id="inspector">
-    <h3>Select a case</h3>
-</div>
-
-</div>
-
-<script>
-
-let activeCase = null;
-let staffChat = [];
-let logs = [];
-
-/* TAB SWITCHING (FIXED) */
-function switchTab(tab, el){
-
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    document.getElementById(tab).classList.add("active");
-
-    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-    el.classList.add("active");
-}
-
-/* CASE OPEN */
-function openCase(user, reason){
-
-    activeCase = { user, reason, messages: [] };
-
-    document.getElementById("inspector").innerHTML = `
-        <h3>${user}</h3>
-        <p class="small">${reason}</p>
-
-        <button onclick="action('ACCEPTED')">Accept</button>
-        <button onclick="action('DENIED')">Deny</button>
-        <button onclick="action('ESCALATED')">Escalate</button>
-
-        <hr>
-
-        <b>Case Chat</b>
-        <div id="chat"></div>
-
-        <input class="input" id="msg" placeholder="Message...">
-        <button onclick="send()">Send</button>
-    `;
-
-}
-
-/* CASE CHAT */
-function send(){
-
-    let m = document.getElementById("msg").value;
-    if(!m) return;
-
-    document.getElementById("chat").innerHTML +=
-    `<div class="msg"><b>Staff:</b> ${m}</div>`;
-
-    document.getElementById("msg").value = "";
-}
-
-/* ACTIONS */
-function action(type){
-
-    document.getElementById("chat").innerHTML +=
-    `<div class="msg"><b>Status:</b> ${type}</div>`;
-}
-
-/* STAFF CHAT */
-function sendStaff(){
-
-    let m = document.getElementById("staffMsg").value;
-    if(!m) return;
-
-    staffChat.push(m);
-
-    document.getElementById("staffBox").innerHTML +=
-    `<div class="msg">${m}</div>`;
-
-    document.getElementById("staffMsg").value = "";
-}
-
-/* LOGS */
-function log(text){
-
-    logs.push(text);
-
-    document.getElementById("logBox").innerHTML = "";
-
-    logs.forEach(l => {
-        document.getElementById("logBox").innerHTML +=
-        `<div class="msg">${l}</div>`;
-    });
-}
-
-</script>
+  </div>
 
 </body>
 </html>
