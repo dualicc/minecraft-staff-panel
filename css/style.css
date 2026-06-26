@@ -74,3 +74,30 @@ button {
 button:hover {
     background: #1d4ed8;
 }
+.nav-item {
+    padding: 8px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #111827;
+}
+
+.nav-item:hover {
+    background: #273244;
+}
+
+.nav-item.active {
+    background: #2563eb;
+}
+
+.item {
+    padding: 10px;
+    margin-top: 8px;
+    background: #111827;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.item:hover {
+    background: #273244;
+}
