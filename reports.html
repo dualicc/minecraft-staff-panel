@@ -1,60 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Reports</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Panel | Reports</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-<div class="topbar">
-    <h1>Reports</h1>
-</div>
+  <div class="sidebar">
+    <div class="logo">Staff Panel</div>
 
-<div class="content">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="reports.html" class="active">Reports</a>
+    <a href="appeals.html">Appeals</a>
+    <a href="punishments.html">Punishments</a>
+    <a href="players.html">Players</a>
+    <a href="staff.html">Staff</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="audit-log.html">Audit Log</a>
+    <a href="settings.html">Settings</a>
+  </div>
 
-    <div class="cards">
+  <div class="main">
 
-        <div class="card">
-            <h3>Report List</h3>
+    <div class="topbar">
+      <h1>Reports</h1>
+      <div class="user">
+        <span class="status"></span>
+        Moderator Panel
+      </div>
+    </div>
 
-            <div class="report" onclick="openReport('Steve')">Griefing - Steve</div>
-            <div class="report" onclick="openReport('Alex')">Chat Abuse - Alex</div>
-            <div class="report" onclick="openReport('Notch')">Hacking - Notch</div>
+    <div class="panel">
 
-        </div>
+      <h2>Active Reports</h2>
 
-        <div class="card" id="reportBox">
-            <h3>Details</h3>
-            <p>Select a report</p>
-        </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Player</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>#101</td>
+            <td>PlayerOne</td>
+            <td>Cheating</td>
+            <td>Open</td>
+            <td>5 min ago</td>
+          </tr>
+
+          <tr>
+            <td>#102</td>
+            <td>NoobSlayer</td>
+            <td>Abuse</td>
+            <td>Under Review</td>
+            <td>20 min ago</td>
+          </tr>
+
+          <tr>
+            <td>#103</td>
+            <td>Steve</td>
+            <td>Spam</td>
+            <td>Closed</td>
+            <td>1 hr ago</td>
+          </tr>
+        </tbody>
+
+      </table>
 
     </div>
 
-</div>
-
-<script>
-function openReport(name) {
-    const box = document.getElementById("reportBox");
-
-    if (name === "Steve") {
-        box.innerHTML = "<h3>Steve</h3><p>Griefing report</p><button onclick='resolve(this)'>Resolve</button>";
-    }
-
-    if (name === "Alex") {
-        box.innerHTML = "<h3>Alex</h3><p>Chat abuse report</p><button onclick='resolve(this)'>Resolve</button>";
-    }
-
-    if (name === "Notch") {
-        box.innerHTML = "<h3>Notch</h3><p>Hacking report</p><button onclick='resolve(this)'>Resolve</button>";
-    }
-}
-
-function resolve(btn) {
-    btn.parentElement.innerHTML = "<p style='color:lime;'>Resolved ✔</p>";
-}
-</script>
+  </div>
 
 </body>
 </html>
