@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Staff Panel</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<div class="dashboard">
-
-    <aside class="sidebar">
-        <h2>Staff Panel</h2>
-
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="reports.html">Reports</a>
-        <a href="punishments.html">Punishments</a>
-        <a href="appeals.html">Appeals</a>
-        <a href="staff.html">Staff</a>
-    </aside>
-
-    <main class="content">
+<main class="content">
 
     <div class="topbar">
-
         <div>
             <h1>Dashboard</h1>
             <p>Welcome back, dualic.</p>
@@ -33,33 +10,59 @@
             <span class="status"></span>
             Administrator
         </div>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>24</h2>
+            <p>Open Reports</p>
+        </div>
+
+        <div class="card">
+            <h2>9</h2>
+            <p>Pending Appeals</p>
+        </div>
+
+        <div class="card">
+            <h2>6</h2>
+            <p>Staff Online</p>
+        </div>
 
     </div>
 
-        <div class="cards">
+    <div class="panel">
 
-            <div class="card">
-                <h2>24</h2>
-                <p>Open Reports</p>
-            </div>
+        <h2>Recent Reports</h2>
 
-            <div class="card">
-                <h2>9</h2>
-                <p>Pending Appeals</p>
-            </div>
+        <table>
 
-            <div class="card">
-                <h2>6</h2>
-                <p>Online Staff</p>
-            </div>
+            <tr>
+                <th>Player</th>
+                <th>Reason</th>
+                <th>Status</th>
+            </tr>
 
-        </div>
+            <tr>
+                <td>Steve</td>
+                <td>Fly Hacks</td>
+                <td><span class="badge open">Open</span></td>
+            </tr>
 
-    </main>
+            <tr>
+                <td>Alex</td>
+                <td>Chat Abuse</td>
+                <td><span class="badge closed">Closed</span></td>
+            </tr>
 
-</div>
+            <tr>
+                <td>Notch</td>
+                <td>X-Ray</td>
+                <td><span class="badge review">Review</span></td>
+            </tr>
 
-<script src="js/app.js"></script>
+        </table>
 
-</body>
-</html>
+    </div>
+
+</main>
