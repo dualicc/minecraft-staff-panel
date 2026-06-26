@@ -1,18 +1,42 @@
 # Minecraft Staff Panel
 
-A simple staff panel UI made with HTML, CSS, and JavaScript, inspired by Minecraft server admin tools.
+A clean, modern staff dashboard UI for Minecraft servers. Built with HTML, CSS, and JavaScript.
 
-It doesn’t connect to any backend or real server data. Everything is just frontend and fake data for layout and interaction practice.
+##  Features
 
-## What’s inside
+- Dashboard overview with live stats
+- Reports management page
+- Player punishment tracking
+- Appeal handling system
+- Staff management pages
+- Analytics overview
+- Audit log system
+- Settings panel UI
 
-- Login screen (basic redirect)
-- Dashboard with fake live stats
-- Reports page with clickable report details
-- Punishments page with player history
-- Appeals page with approve/deny actions
-- Staff page
+##  Pages Included
 
-## Why I made it
+- dashboard.html
+- reports.html
+- appeals.html
+- punishments.html
+- players.html
+- player.html
+- staff.html
+- staff-member.html
+- analytics.html
+- audit-log.html
+- settings.html
 
-I wanted to practice building a bigger front-end project and get better at organizing multiple pages that actually work together.
+##  Notes
+
+- This is a **front-end only mockup**
+- No backend or database is included
+- Data is currently static (placeholder values)
+
+##  Future Ideas
+
+- Add Firebase / Node.js backend
+- Real login system
+- Live database for reports & punishments
+- Role-based access control
+
