@@ -12,7 +12,6 @@ body {
     color: white;
 }
 
-/* TOP BAR */
 .topbar {
     height: 56px;
     display: flex;
@@ -26,7 +25,7 @@ body {
 /* LAYOUT */
 .app {
     display: grid;
-    grid-template-columns: 240px 1fr 360px;
+    grid-template-columns: 260px 1fr 380px;
     height: calc(100vh - 56px);
 }
 
@@ -40,15 +39,17 @@ body {
 .nav-title {
     font-size: 11px;
     opacity: 0.5;
-    margin: 14px 0 6px;
+    margin-top: 14px;
 }
 
 .nav-item {
     padding: 10px;
-    margin-bottom: 6px;
+    margin-top: 6px;
     border-radius: 8px;
     background: #111827;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
 }
 
 .nav-item:hover {
@@ -68,30 +69,9 @@ body {
 /* INSPECTOR */
 .inspector {
     border-left: 1px solid #1f2937;
-    padding: 16px;
     background: #0f172a;
-}
-
-/* TABLE ROWS */
-.row {
-    display: grid;
-    grid-template-columns: 140px 120px 1fr 100px;
-    padding: 10px;
-    background: #111827;
-    margin-bottom: 6px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.row:hover {
-    background: #1f2937;
-}
-
-.badge {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: #374151;
+    padding: 16px;
+    overflow-y: auto;
 }
 
 /* STATS */
@@ -106,6 +86,48 @@ body {
     padding: 12px;
     border-radius: 10px;
 }
+
+/* TOOLBAR */
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    background: #111827;
+    color: white;
+}
+
+/* CASE LIST */
+.case {
+    background: #111827;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.case:hover {
+    background: #1f2937;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #374151;
+    margin-left: 6px;
+}
+
+.status-open { color: #facc15; }
+.status-closed { color: #22c55e; }
+.status-escalated { color: #ef4444; }
 
 button {
     margin-top: 10px;
@@ -125,6 +147,18 @@ button:hover {
     font-size: 12px;
     opacity: 0.7;
 }
+
+.timeline {
+    margin-top: 10px;
+    padding-left: 10px;
+    border-left: 2px solid #1f2937;
+}
+
+.log {
+    font-size: 12px;
+    margin-bottom: 6px;
+    opacity: 0.8;
+}
 </style>
 </head>
 
@@ -133,7 +167,7 @@ button:hover {
 <div class="topbar">
     <div>
         <b>Moderation Control Panel</b>
-        <div class="small">Live system</div>
+        <div class="small">Live case system</div>
     </div>
     <div class="small">Admin • Online</div>
 </div>
@@ -146,7 +180,7 @@ button:hover {
     <div class="nav-title">OVERVIEW</div>
     <div class="nav-item active" onclick="switchTab('dashboard', this)">Dashboard</div>
 
-    <div class="nav-title">MODERATION</div>
+    <div class="nav-title">CASES</div>
     <div class="nav-item" onclick="switchTab('reports', this)">Reports</div>
     <div class="nav-item" onclick="switchTab('punishments', this)">Punishments</div>
     <div class="nav-item" onclick="switchTab('appeals', this)">Appeals</div>
@@ -171,20 +205,24 @@ button:hover {
 <!-- REPORTS -->
 <div id="reports" class="tab" style="display:none;">
 
-    <h3>Reports</h3>
-
-    <div class="row" onclick="inspect('Steve','Griefing','Destroyed builds','Screenshots')">
-        <div>Steve</div>
-        <div><span class="badge">Grief</span></div>
-        <div>Destroyed spawn builds</div>
-        <div>Open</div>
+    <div class="toolbar">
+        <input placeholder="Search reports..." oninput="filterCases(this.value)">
     </div>
 
-    <div class="row" onclick="inspect('Alex','Chat','Toxic chat','Logs')">
-        <div>Alex</div>
-        <div><span class="badge">Chat</span></div>
-        <div>Spamming insults</div>
-        <div>Open</div>
+    <div id="caseList">
+
+        <div class="case" onclick="openCase('Steve','Griefing','Destroyed multiple spawn builds','Evidence: screenshots','open')">
+            Steve <span class="badge">Grief</span> <span class="status-open">OPEN</span>
+        </div>
+
+        <div class="case" onclick="openCase('Alex','Chat Abuse','Toxic messages in chat','Logs attached','open')">
+            Alex <span class="badge">Chat</span> <span class="status-open">OPEN</span>
+        </div>
+
+        <div class="case" onclick="openCase('Notch','Hacking','X-Ray usage detected','Mining pattern data','escalated')">
+            Notch <span class="badge">Hack</span> <span class="status-escalated">ESCALATED</span>
+        </div>
+
     </div>
 
 </div>
@@ -192,13 +230,8 @@ button:hover {
 <!-- PUNISHMENTS -->
 <div id="punishments" class="tab" style="display:none;">
 
-    <h3>Punishments</h3>
-
-    <div class="row" onclick="inspect('Notch','Ban','X-Ray','Permanent ban')">
-        <div>Notch</div>
-        <div><span class="badge">Ban</span></div>
-        <div>X-Ray detected</div>
-        <div>Closed</div>
+    <div class="case" onclick="openCase('Notch','Ban','Permanent ban issued','X-Ray confirmed','closed')">
+        Notch <span class="status-closed">CLOSED</span>
     </div>
 
 </div>
@@ -206,13 +239,8 @@ button:hover {
 <!-- APPEALS -->
 <div id="appeals" class="tab" style="display:none;">
 
-    <h3>Appeals</h3>
-
-    <div class="row" onclick="inspect('Steve','Appeal','Unfair ban','Request review')">
-        <div>Steve</div>
-        <div><span class="badge">Appeal</span></div>
-        <div>Ban appeal submitted</div>
-        <div>Pending</div>
+    <div class="case" onclick="openCase('Steve','Appeal','Ban appeal submitted','User statement included','open')">
+        Steve Appeal <span class="status-open">PENDING</span>
     </div>
 
 </div>
@@ -222,8 +250,8 @@ button:hover {
 <!-- INSPECTOR -->
 <div class="inspector" id="inspector">
 
-    <h3>Inspector</h3>
-    <p class="small">Select a case</p>
+    <h3>Case Viewer</h3>
+    <p class="small">Select a case to view full details</p>
 
 </div>
 
@@ -240,14 +268,27 @@ function switchTab(id, el){
     el.classList.add("active");
 }
 
-function inspect(user,type,reason,evidence){
+function openCase(user,type,reason,evidence,status){
+
+    const time = new Date().toLocaleString();
 
     document.getElementById("inspector").innerHTML = `
         <h3>${user}</h3>
-        <p><span class="badge">${type}</span></p>
+        <p><b>Type:</b> ${type}</p>
+        <p><b>Status:</b> ${status}</p>
+
+        <hr style="border:1px solid #1f2937">
 
         <p><b>Reason:</b> ${reason}</p>
         <p><b>Evidence:</b> ${evidence}</p>
+
+        <p class="small"><b>Opened:</b> ${time}</p>
+
+        <div class="timeline">
+            <div class="log">Case created</div>
+            <div class="log">Assigned to moderation queue</div>
+            <div class="log">Under review</div>
+        </div>
 
         <hr style="border:1px solid #1f2937">
 
@@ -256,8 +297,14 @@ function inspect(user,type,reason,evidence){
     `;
 }
 
-function update(){
+function filterCases(value){
+    const cases = document.querySelectorAll(".case");
+    cases.forEach(c => {
+        c.style.display = c.innerText.toLowerCase().includes(value.toLowerCase()) ? "block" : "none";
+    });
+}
 
+function update(){
     document.getElementById("p").textContent = Math.floor(Math.random()*900+300);
     document.getElementById("r").textContent = Math.floor(Math.random()*40);
     document.getElementById("a").textContent = Math.floor(Math.random()*25);
