@@ -16,28 +16,18 @@
 
     <div class="cards">
 
-        <!-- Report List -->
         <div class="card">
-            <h3>Reports</h3>
+            <h3>Report List</h3>
 
-            <div class="report" onclick="openReport('Griefing - Steve')">
-                Griefing - Steve
-            </div>
-
-            <div class="report" onclick="openReport('Chat Abuse - Alex')">
-                Chat Abuse - Alex
-            </div>
-
-            <div class="report" onclick="openReport('Hacking - Notch')">
-                Hacking - Notch
-            </div>
+            <div class="report" onclick="openReport('Griefing')">Griefing - Steve</div>
+            <div class="report" onclick="openReport('Chat Abuse')">Chat Abuse - Alex</div>
+            <div class="report" onclick="openReport('Hacking')">Hacking - Notch</div>
 
         </div>
 
-        <!-- Report Details -->
         <div class="card" id="reportBox">
-            <h3>Report Details</h3>
-            <p>Select a report to view details</p>
+            <h3>Details</h3>
+            <p>Select a report</p>
         </div>
 
     </div>
@@ -45,42 +35,36 @@
 </div>
 
 <script>
-function openReport(title) {
+function openReport(type) {
     const box = document.getElementById("reportBox");
 
-    if (title === "Griefing - Steve") {
+    if (type === "Griefing") {
         box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> Destroyed player builds</p>
-            <p><b>Reported by:</b> Alex</p>
-            <p><b>Status:</b> Pending</p>
-            <button onclick="resolveReport(this)">Mark as Resolved</button>
+            <h3>Griefing - Steve</h3>
+            <p>Player destroyed builds</p>
+            <button onclick="resolve(this)">Resolve</button>
         `;
     }
 
-    if (title === "Chat Abuse - Alex") {
+    if (type === "Chat Abuse") {
         box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> Toxic chat behavior</p>
-            <p><b>Reported by:</b> Steve</p>
-            <p><b>Status:</b> Pending</p>
-            <button onclick="resolveReport(this)">Mark as Resolved</button>
+            <h3>Chat Abuse - Alex</h3>
+            <p>Toxic chat behavior</p>
+            <button onclick="resolve(this)">Resolve</button>
         `;
     }
 
-    if (title === "Hacking - Notch") {
+    if (type === "Hacking") {
         box.innerHTML = `
-            <h3>${title}</h3>
-            <p><b>Reason:</b> Suspected X-Ray</p>
-            <p><b>Reported by:</b> System</p>
-            <p><b>Status:</b> Under Review</p>
-            <button onclick="resolveReport(this)">Mark as Resolved</button>
+            <h3>Hacking - Notch</h3>
+            <p>Suspected X-Ray</p>
+            <button onclick="resolve(this)">Resolve</button>
         `;
     }
 }
 
-function resolveReport(btn) {
-    btn.outerHTML = "<p style='color:limegreen; font-weight:bold;'>Resolved ✔</p>";
+function resolve(btn) {
+    btn.parentElement.innerHTML = "<p style='color:lime;'>Resolved ✔</p>";
 }
 </script>
 
