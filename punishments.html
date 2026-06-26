@@ -14,17 +14,56 @@
 
 <div class="content">
 
-    <div class="card">
-        <h3>Active Punishments</h3>
-        <p>No bans or mutes currently active</p>
-    </div>
+    <div class="cards">
 
-    <div class="card">
-        <h3>History</h3>
-        <p>No records found</p>
+        <!-- Player List -->
+        <div class="card">
+            <h3>Players</h3>
+
+            <div class="player" onclick="showHistory('Steve')">Steve</div>
+            <div class="player" onclick="showHistory('Alex')">Alex</div>
+            <div class="player" onclick="showHistory('Notch')">Notch</div>
+
+        </div>
+
+        <!-- History Panel -->
+        <div class="card" id="historyBox">
+            <h3>Player History</h3>
+            <p>Select a player to view punishment history</p>
+        </div>
+
     </div>
 
 </div>
+
+<script>
+function showHistory(name) {
+    const box = document.getElementById("historyBox");
+
+    if (name === "Steve") {
+        box.innerHTML = `
+            <h3>${name} - History</h3>
+            <p>• Warned for griefing</p>
+            <p>• Muted for chat abuse</p>
+        `;
+    }
+
+    if (name === "Alex") {
+        box.innerHTML = `
+            <h3>${name} - History</h3>
+            <p>• No punishments found</p>
+        `;
+    }
+
+    if (name === "Notch") {
+        box.innerHTML = `
+            <h3>${name} - History</h3>
+            <p>• Banned for exploit usage</p>
+            <p>• Appeal denied</p>
+        `;
+    }
+}
+</script>
 
 </body>
 </html>
