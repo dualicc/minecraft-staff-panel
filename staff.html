@@ -1,26 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Staff</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Panel | Staff</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-<div class="topbar">
-    <h1>Staff</h1>
-</div>
+  <div class="sidebar">
+    <div class="logo">Staff Panel</div>
 
-<div class="content">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="reports.html">Reports</a>
+    <a href="appeals.html">Appeals</a>
+    <a href="punishments.html">Punishments</a>
+    <a href="players.html">Players</a>
+    <a href="staff.html" class="active">Staff</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="audit-log.html">Audit Log</a>
+    <a href="settings.html">Settings</a>
+  </div>
 
-    <div class="card">
-        <h3>Online Staff</h3>
-        <p>Admin - Online</p>
-        <p>Mod - Offline</p>
+  <div class="main">
+
+    <div class="topbar">
+      <h1>Staff</h1>
+      <div class="user">
+        <span class="status"></span>
+        Admin Panel
+      </div>
     </div>
 
-</div>
+    <div class="panel">
+
+      <h2>Staff Members</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Rank</th>
+            <th>Status</th>
+            <th>Last Active</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>AdminX</td>
+            <td>Admin</td>
+            <td>Online</td>
+            <td>Now</td>
+          </tr>
+
+          <tr>
+            <td>ModZ</td>
+            <td>Moderator</td>
+            <td>Offline</td>
+            <td>1 hr ago</td>
+          </tr>
+
+          <tr>
+            <td>HelperA</td>
+            <td>Helper</td>
+            <td>Online</td>
+            <td>Now</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
 
 </body>
 </html>
