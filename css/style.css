@@ -54,3 +54,19 @@ body {
     transform: translateY(-4px);
     background: #273244;
 }
+/* Page cards spacing fix */
+.card {
+    margin-bottom: 15px;
+}
+
+/* Page headers look cleaner */
+.topbar h1 {
+    margin: 0;
+}
+
+/* Make paragraphs inside cards cleaner */
+.card p {
+    margin-top: 8px;
+    opacity: 0.85;
+    font-size: 14px;
+}
