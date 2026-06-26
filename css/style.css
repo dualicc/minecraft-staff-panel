@@ -70,3 +70,15 @@ body {
     opacity: 0.85;
     font-size: 14px;
 }
+.player {
+    padding: 10px;
+    margin-top: 8px;
+    background: #111827;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.player:hover {
+    background: #273244;
+}
