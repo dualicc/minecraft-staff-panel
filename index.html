@@ -26,16 +26,19 @@
 
         input {
             width: 100%;
+            box-sizing: border-box;
             padding: 10px;
             margin-top: 10px;
             border: none;
             border-radius: 6px;
             background: #1f2937;
             color: white;
+            display: block;
         }
 
         button {
             width: 100%;
+            box-sizing: border-box;
             padding: 10px;
             margin-top: 15px;
             border: none;
@@ -43,6 +46,7 @@
             background: #2563eb;
             color: white;
             cursor: pointer;
+            display: block;
         }
 
         button:hover {
@@ -56,7 +60,7 @@
 <div class="box">
     <h2>Staff Panel Login</h2>
 
-    <input placeholder="Username">
+    <input type="text" placeholder="Username">
     <input type="password" placeholder="Password">
 
     <button onclick="login()">Login</button>
