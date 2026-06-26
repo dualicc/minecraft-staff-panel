@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Staff Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -10,8 +10,12 @@
 
 <div class="topbar">
     <div>
-        <h1>Staff Dashboard</h1>
-        <p>Overview of server activity</p>
+        <h1>Staff Control Panel</h1>
+        <p>Network overview and moderation tools</p>
+    </div>
+
+    <div>
+        <p>Logged in: Admin</p>
     </div>
 </div>
 
@@ -19,42 +23,53 @@
 
     <div class="cards">
 
-        <!-- LEFT: MAIN STATS -->
+        <!-- STATUS OVERVIEW -->
         <div class="card">
-            <h3>Server Status</h3>
+            <h3>Network Status</h3>
             <p>Online Players: <span id="playersCount">0</span></p>
-            <p>Reports: <span id="reportsCount">0</span></p>
-            <p>Appeals: <span id="appealsCount">0</span></p>
             <p>Staff Online: <span id="staffCount">0</span></p>
+            <p>Active Reports: <span id="reportsCount">0</span></p>
+            <p>Pending Appeals: <span id="appealsCount">0</span></p>
         </div>
 
         <!-- QUICK ACTIONS -->
         <a class="card" href="reports.html">
-            <h3>Open Reports</h3>
-            <p>Review player reports</p>
+            <h3>Reports Queue</h3>
+            <p>Review and manage player reports</p>
         </a>
 
         <a class="card" href="punishments.html">
-            <h3>Punishments</h3>
-            <p>Check player history</p>
+            <h3>Punishment Logs</h3>
+            <p>View player moderation history</p>
         </a>
 
         <a class="card" href="appeals.html">
-            <h3>Appeals</h3>
-            <p>Handle ban/mute appeals</p>
+            <h3>Appeals Center</h3>
+            <p>Handle ban and mute appeals</p>
         </a>
 
         <a class="card" href="staff.html">
-            <h3>Staff</h3>
-            <p>View staff activity</p>
+            <h3>Staff Activity</h3>
+            <p>Monitor staff online status</p>
         </a>
 
-        <!-- ACTIVITY FEED -->
+        <!-- LIVE ACTIVITY FEED -->
         <div class="card">
-            <h3>Recent Activity</h3>
-            <p>• Steve was reported for griefing</p>
-            <p>• Alex submitted an appeal</p>
-            <p>• Notch was punished (X-Ray)</p>
+            <h3>Live Activity</h3>
+
+            <p>🟡 Steve was reported for griefing</p>
+            <p>🟡 Alex submitted an appeal</p>
+            <p>🔴 Notch was banned (X-Ray detected)</p>
+            <p>🟢 ModX joined staff chat</p>
+            <p>🟡 Report queue updated</p>
+        </div>
+
+        <!-- SYSTEM INFO -->
+        <div class="card">
+            <h3>System</h3>
+            <p>Status: Stable</p>
+            <p>Region: NA-East</p>
+            <p>Uptime: 12h 43m</p>
         </div>
 
     </div>
@@ -63,14 +78,14 @@
 
 <script>
 function update() {
-    document.getElementById("playersCount").textContent = Math.floor(Math.random()*60+10);
-    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*10);
-    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*8);
-    document.getElementById("staffCount").textContent = Math.floor(Math.random()*5);
+    document.getElementById("playersCount").textContent = Math.floor(Math.random()*800 + 200);
+    document.getElementById("staffCount").textContent = Math.floor(Math.random()*25 + 5);
+    document.getElementById("reportsCount").textContent = Math.floor(Math.random()*30);
+    document.getElementById("appealsCount").textContent = Math.floor(Math.random()*20);
 }
 
 update();
-setInterval(update, 3000);
+setInterval(update, 2500);
 </script>
 
 </body>
