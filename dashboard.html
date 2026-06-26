@@ -2,97 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Staff Panel</title>
-
+    <title>Staff Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<div class="dashboard">
-
-    <aside class="sidebar">
-        <h2>Staff Panel</h2>
-
-        <a href="dashboard.html" class="active">Dashboard</a>
-        <a href="reports.html">Reports</a>
-        <a href="punishments.html">Punishments</a>
-        <a href="appeals.html">Appeals</a>
-        <a href="staff.html">Staff</a>
-    </aside>
-
-    <main class="content">
-
-        <div class="topbar">
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome back, dualic.</p>
-            </div>
-
-            <div class="profile">
-                <span class="status"></span>
-                Administrator
-            </div>
+    <div class="topbar">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Welcome back, Admin</p>
         </div>
+
+        <div class="profile">
+            <span class="status"></span>
+            Administrator
+        </div>
+    </div>
+
+    <div class="content">
 
         <div class="cards">
 
-            <div class="card">
-                <h2>24</h2>
-                <p>Open Reports</p>
-            </div>
+            <a class="card" href="reports.html">
+                <h3>Reports</h3>
+                <p>View and manage player reports</p>
+            </a>
 
-            <div class="card">
-                <h2>9</h2>
-                <p>Pending Appeals</p>
-            </div>
+            <a class="card" href="punishments.html">
+                <h3>Punishments</h3>
+                <p>Manage bans, mutes, kicks</p>
+            </a>
 
-            <div class="card">
-                <h2>6</h2>
-                <p>Staff Online</p>
-            </div>
+            <a class="card" href="appeals.html">
+                <h3>Appeals</h3>
+                <p>Review player appeals</p>
+            </a>
 
-        </div>
-
-        <div class="panel">
-
-            <h2>Recent Reports</h2>
-
-            <table>
-
-                <tr>
-                    <th>Player</th>
-                    <th>Reason</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td>Steve</td>
-                    <td>Fly Hacks</td>
-                    <td><span class="badge open">Open</span></td>
-                </tr>
-
-                <tr>
-                    <td>Alex</td>
-                    <td>Chat Abuse</td>
-                    <td><span class="badge closed">Closed</span></td>
-                </tr>
-
-                <tr>
-                    <td>Notch</td>
-                    <td>X-Ray</td>
-                    <td><span class="badge review">Review</span></td>
-                </tr>
-
-            </table>
+            <a class="card" href="players.html">
+                <h3>Players</h3>
+                <p>Search and view player info</p>
+            </a>
 
         </div>
 
-    </main>
-
-</div>
-
-<script src="js/app.js"></script>
+    </div>
 
 </body>
 </html>
